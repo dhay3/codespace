@@ -1,0 +1,11 @@
+{
+	"name": "python3 + anaconda + docker-in-docker + act",
+	"image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/devcontainers/features/anaconda:1": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/dhoeric/features/act:1": {}
+	},
+	"postCreateCommand": "uname -a && python3 --version && conda --version && act --version",
+}
