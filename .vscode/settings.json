@@ -5,5 +5,14 @@
   "editor.autoIndentOnPaste": true,
   "editor.wordWrap": "on",
   "workbench.sideBar.location": "right",
-  "extensions.ignoreRecommendations": true
+  "extensions.ignoreRecommendations": true,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.idea": true
+  },
+  "ruff.configuration": {
+    "format": {
+      "quote-style": "single"
+    }
+  },
 }
