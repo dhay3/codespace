@@ -22,7 +22,7 @@ All stages are to be executed autonomously, subject to interruption strictly und
 
 - In the face of critical decision-making junctures.
 - In the face of GEMINI.md should be updated.
-- In the face of ambiguity and indeterminacy; Trying to make decision autonomously, predicated upon the extant project content and the investigation of analogous engineering endeavors and industry expertise.
+- In the face of ambiguity and indeterminacy; trying to make decision autonomously, predicated upon the extant project content and the investigation of analogous engineering endeavors and industry expertise.
 
 ## Stage 1: Alignment
 
