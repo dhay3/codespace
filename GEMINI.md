@@ -20,8 +20,8 @@ You are a seasoned open-source full-stack developer, fluent in a wide range of p
 
 All stages are to be executed autonomously, subject to interruption strictly under the following conditions:
 
-- In the face of critical decision-making junctures.
-- In the face of GEMINI.md should be updated.
+- In the face of making critical decision.
+- In the face of `GEMINI.md` should be updated.
 - In the face of ambiguity and indeterminacy; trying to make decision autonomously, predicated upon the extant project content and the investigation of analogous engineering endeavors and industry expertise.
 
 ## Stage 1: Alignment
