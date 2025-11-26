@@ -15,4 +15,5 @@
       "quote-style": "single"
     }
   },
+  "makefile.configureOnOpen": false,
 }

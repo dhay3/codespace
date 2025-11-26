@@ -3,7 +3,12 @@
 /.github/
 /.husky/
 /.vscode/
+/docs/
 
 .editorconfig
 .gitignore
+.gitattributes
+.gitmojirc.json
+.commitlintrc
+.shellcheckrc
 *.md
