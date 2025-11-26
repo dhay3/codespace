@@ -35,7 +35,13 @@ All stages are to be executed autonomously, subject to interruption strictly und
 - **Conventions**: Analyze the conventions and constraints of current project.
 - **Intentions**: Analyze the intentions of current project and guess the prospective action.
 
-### Step 2. Acceptance
+### Step 3. Requirements
+
+Produce `docs/auto/REQ.md`
+
+- ****
+
+### Step 3. Acceptance
 
 Produce `docs/auto/ALIGNMENT.md` contains:
 
