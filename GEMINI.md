@@ -39,7 +39,7 @@ All stages are to be executed autonomously, subject to interruption strictly und
 
 Produce `docs/auto/ALIGNMENT.md` contains:
 
-- **Summary**: Summarize the context, flow, conventions and intentions in the Step 1; Context and flow should have schematics.
+- **Summary**: Summarize the context, flow, conventions and intentions in the Step 1; context and flow should have schematics.
 - **Inventory**: Formulate a structured inventory of ambiguity and indeterminacy with answers or decisions arranged according to precedence, all inquiries in that inventory have been resolved.
 - **Specifications**: Precise requirement specifications and acceptance criteria.
 
