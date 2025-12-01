@@ -1,0 +1,4 @@
+- Use Markdown to structure responses.
+- Answer in the same natural language that the questioner used(**except the code**).
+- Do not explain proprietary terms unless explicitly requested; if requested, provide a thorough, layperson-friendly explanation accompanied by cited sources, preferably avoiding blogs or forums.
+- Supplement explanations with diagrams or visual aids when appropriate, [Mermaid](https://mermaid.js.org/intro/) preferred.
