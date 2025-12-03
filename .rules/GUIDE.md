@@ -22,32 +22,33 @@ All stages are to be executed autonomously, subject to interruption strictly und
 
 ### Step 1. Analysis
 
-1. Analyze the language(s), tech stack(frameworks and key components), dependencies from code and documentations.
-2. Analyze the databases schema, data flow and CI(.github/workflows).
+1. Analyze the language(s), tech stack(frameworks and key components), dependencies from code(under `src/`) and documentations(under `docs/` or `README.md`).
+2. Analyze the databases schema, data flow and CI(`.github/workflows`).
 3. Analyze the conventions and constraints of current project.
 4. Analyze the intentions of current project, and guess the prospective action.
+5. Produce `docs/auto/ALIGN_ANALYSIS.md` summarize the project with comprehensive description with schematics.
 
-### Step 2. Clarification
+### Step 2. Requirements Confirmation
 
-1. If `docs/auto/REQ.md` is absent, it is imperative to trigger an interruption to solicit a synopsis of requirements and create `docs/auto/REQ.md`; otherwise, use `docs/auto/REQ.md` as requirements.
-2. Formulate a structured inventory of ambiguity and indeterminacy with answers or decisions arranged according to precedence; trying to answer autonomously, predicated upon the extant project content and the investigation of analogous engineering endeavors and industry expertise, authorized to trigger an interruption when independent resolution prove unfeasible.
-3. Base on update
-4. Refine `docs/auto/REQ.md` into precise requirement specifications.
+1. If `docs/auto/ALIGN_REQUEST.md` is absent, it is imperative to trigger an interruption to solicit a synopsis of requirements and create `docs/auto/ALIGN_REQUEST.md`; otherwise, use `docs/auto/ALIGN_REQUEST.md` as requirements.
+2. Based on `docs/auto/ALIGN_ANALYSIS.md` and `docs/auto/ALIGN_REQUEST.md`, formulate a structured inventory(`docs/auto/ALIGN_INVENTORY.md`) of ambiguity and indeterminacy arranged according to precedence; trying to answer autonomously, predicated upon the extant project content and the investigation of analogous engineering endeavors and industry expertise, authorized to trigger an interruption when independent resolution prove unfeasible.
+3. Refine `docs/auto/ALIGN_REQUEST.md` into precise requirement specifications, based on `docs/auto/ALIGN_INVENTORY.md`.
 
 ### Step 3. Acceptance
 
-1. Produce `docs/auto/ANA.md` summarize the project with comprehensive description with schematics.
-2. All inquiries of ambiguity and indeterminacy inventory must resolved.
-3. Precise requirements and acceptance criteria
+1. All inquiries of `docs/auto/ALIGN_INVENTORY.md` must resolved.
+2. Precise requirements in `docs/auto/ALIGN_REQUEST.md`.
+3. Update comprehension based on `docs/auto/*`.
 
 ## Stage 2. Design
 
-**Objective**: Based on `docs/auto/ALIGNMENT.md`, design the project.
+**Objective**: Based on `docs/auto/ALIGN_REQUEST.md`, design the project into a stratified architecture, distinguished by its exceptional extensibility, seamless maintainability, loose coupling, and uncompromising security.
 
-### Step 1. Principles
+### Step 1. Define Principles
 
-- Components characterized by disparate functionalities should be divided into different layers, eg. [v2ray-core](https://github.com/v2fly/v2ray-core)
-- Error handling or mitigation in an unified approach; Control flow
+- Components characterized by disparate functionalities should be divided into different layers, eg. [v2ray-core](https://github.com/v2fly/v2ray-core).
+- General-purpose functions and classes must be meticulously architected to reserve sufficient latitude for future extensibility.
+- Error handling or mitigation in an unified approach.
 - Use components of current project first, then extant open-source libraries or tools.
 - Security should be considered from the beginning.
 
@@ -55,8 +56,9 @@ All stages are to be executed autonomously, subject to interruption strictly und
 
 Produce `docs/auto/DESIGN.md` contains:
 
-- **Schematic**: Architectural schematic in a stratified framework, includes pivotal components, module dependencies; Data flow schematic; Error handling and mitigation strategies schematic; All schematics are rendered via Mermaid.
-- **Viability**: Prove the design is viable, each pivotal components is able to independent substantiation.
+<!-- 1. Produce `docs/auto/DESIGN_ARCH.md`, -->
+1. Architectural schematic in a stratified framework, includes pivotal components, module dependencies; Data flow schematic; Error handling and mitigation strategies schematic; All schematics are rendered via Mermaid.
+2. Prove the design is viable, each pivotal components is able to independent substantiation.
 
 ## Stage 4. Approve
 
