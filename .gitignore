@@ -6,3 +6,5 @@ node_modules/
 logs/
 debug/
 target/
+
+package-lock.json
