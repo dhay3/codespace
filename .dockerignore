@@ -2,7 +2,11 @@
 /.git/
 /.github/
 /.husky/
+/.rules/
 /.vscode/
+/.idea/
+/.conda/
+/.venv/
 /docs/
 
 .editorconfig
@@ -11,4 +15,7 @@
 .gitmojirc.json
 .commitlintrc
 .shellcheckrc
+.prettierrc
 *.md
+
+CNAME
