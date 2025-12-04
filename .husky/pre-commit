@@ -1,1 +1,1 @@
-gitleaks dir . --verbose
+gitleaks git . --verbose
