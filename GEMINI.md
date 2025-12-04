@@ -1,1 +1,1 @@
-you should read from `.rules/GUIDE.md`
+You should read from `.rules/6A.md`.
