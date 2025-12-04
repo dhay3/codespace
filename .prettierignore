@@ -1,0 +1,10 @@
+**/.idea
+**/.git
+**/.conda
+**/.venv
+**/.husky/_/
+**/node_modules
+
+
+docs/
+bundle/
