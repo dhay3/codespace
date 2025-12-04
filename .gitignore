@@ -1,10 +1,11 @@
-.idea/*
-
-venv/
+.idea/
+.conda/
+.venv/
 node_modules/
 
 logs/
 debug/
 target/
+bundle/
 
 package-lock.json
