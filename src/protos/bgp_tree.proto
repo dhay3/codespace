@@ -1,0 +1,329 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  bgp;
+message BGPInstances {
+    message Instance {
+        optional string Name = 1;
+        optional uint32 ASNumber = 2;
+        optional uint32 NSR = 3;
+        optional uint32 SendDelayTime = 4;
+        optional string SendDelayPrefix = 5;
+        optional string SendDelayIPv6Prefix = 6;
+        optional uint32 SendStartupTime = 7;
+        optional uint32 StartupPolicyMed = 8;
+        optional uint32 FlushSuboptimalRoute = 9;
+    }
+    repeated Instance instance = 1;
+}
+message BGPVRFs {
+    message VRF {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional string RouterId = 3;
+        optional uint32 BestRouteIgpMetricIgnore = 4;
+        optional uint32 BestRouteAsPathNeglect = 5;
+        optional uint32 BestRouteCompareMED = 6;
+        optional uint32 BestRouteConfederationMED = 7;
+        optional uint32 BestRouteRouterIdIgnore = 8;
+        optional uint32 CompareDifferentAsMED = 9;
+        message Timer {
+            optional uint32 KeepAlive = 1;
+            optional uint32 HoldTime = 2;
+        }
+        repeated Timer timer = 10;
+    }
+    repeated VRF vrf = 1;
+}
+message BGPCfgSessionGroups {
+    message CfgSessionGroup {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional string GroupName = 3;
+        optional uint32 Type = 4;
+        optional uint32 ASNumber = 5;
+        optional string ConnectInterface = 6;
+        optional uint32 UpdateInterval = 7;
+        optional uint32 BfdType = 8;
+        optional uint32 PasswordType = 9;
+        optional string Password = 10;
+        optional uint32 Ignore = 11;
+        optional uint32 EbgpMaxHop = 12;
+        optional string Description = 13;
+    }
+    repeated CfgSessionGroup cfgsessiongroup = 1;
+}
+message BGPCfgSessions {
+    message CfgSession {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 SessAF = 3;
+        optional string IpAddress = 4;
+        optional uint32 Mask = 5;
+        optional uint32 ASNumber = 6;
+        optional string GroupName = 7;
+        optional string ConnectInterface = 8;
+        optional uint32 UpdateInterval = 9;
+        optional uint32 BfdType = 10;
+        optional uint32 PasswordType = 11;
+        optional string Password = 12;
+        optional uint32 Ignore = 13;
+        optional uint32 EbgpMaxHop = 14;
+        optional string Description = 15;
+    }
+    repeated CfgSession cfgsession = 1;
+}
+message BGPSessions {
+    message Session {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 AF = 3;
+        optional string IpAddress = 4;
+        optional uint32 ASNumber = 5;
+        optional uint32 State = 6;
+    }
+    repeated Session session = 1;
+}
+message BGPFamilys {
+    message Family {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 Type = 3;
+        optional uint32 BalanceAsPathNeglect = 4;
+        optional uint32 BalanceAsPathRelax = 5;
+        optional uint32 PolicyVpnTarget = 6;
+        optional uint32 ReflectBtwClients = 7;
+        optional string ReflectorClusterID = 8;
+        optional uint32 RrFilter = 9;
+        optional uint32 DefaultRtImport = 10;
+        optional uint32 PIC = 11;
+        optional uint32 AdvertiseL2vpnEvpnRoute = 12;
+        optional uint32 ImportEvpnMacIp = 13;
+        optional uint32 VpnCrossMultipath = 14;
+        optional uint32 RouteSelectDelay = 15;
+        optional uint32 DefaultLocalPreference = 16;
+        message Preference {
+            optional uint32 Ebgp = 1;
+            optional uint32 Ibgp = 2;
+            optional uint32 Local = 3;
+        }
+        repeated Preference preference = 17;
+        message Balance {
+            optional uint32 MaxBalance = 1;
+            optional uint32 MaxEBGPBalance = 2;
+            optional uint32 MaxIBGPBalance = 3;
+            optional uint32 MaxEIBGPBalance = 4;
+        }
+        repeated Balance balance = 18;
+        message AdvertiseEvpnRoute {
+            optional uint32 AdvertiseEvpnEnable = 1;
+            optional string AdvertiseEvpnPolicy = 2;
+            optional uint32 AdvertiseEvpnReplaceRt = 3;
+        }
+        repeated AdvertiseEvpnRoute advertiseevpnroute = 19;
+        message AdvertiseL3vpnRoute {
+            optional uint32 AdvertiseL3vpnEnable = 1;
+            optional string AdvertiseL3vpnPolicy = 2;
+            optional uint32 AdvertiseL3vpnReplaceRt = 3;
+        }
+        repeated AdvertiseL3vpnRoute advertisel3vpnroute = 20;
+    }
+    repeated Family family = 1;
+}
+message BGPNetworks {
+    message Network {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 Family = 3;
+        optional string IpAddress = 4;
+        optional uint32 Mask = 5;
+        optional string RoutePolicy = 6;
+    }
+    repeated Network network = 1;
+}
+message BGPAggregates {
+    message Aggregate {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 Family = 3;
+        optional string IpAddress = 4;
+        optional uint32 Mask = 5;
+        optional uint32 DetailSuppressed = 6;
+        optional uint32 AsSet = 7;
+        optional string AttributePolicy = 8;
+        optional string OriginPolicy = 9;
+        optional string SuppressPolicy = 10;
+    }
+    repeated Aggregate aggregate = 1;
+}
+message BGPNeighborGroups {
+    message NeighborGroup {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 Family = 3;
+        optional string GroupName = 4;
+        optional string RtPolicyImport = 5;
+        optional string RtPolicyExport = 6;
+        optional uint32 AllowAsLoop = 7;
+        optional uint32 ReflectClient = 8;
+        optional uint32 NexthopInvariable = 9;
+        optional uint32 NexthopLocal = 10;
+        optional uint32 RouterMacLocal = 11;
+        optional uint32 AdvertiseCommunity = 12;
+        optional uint32 AdvertiseExtCommunity = 13;
+        optional uint32 ReOriginated = 14;
+        optional uint32 AdvEvpnRouteSuppressMac = 15;
+        optional uint32 AdvEvpnRouteSuppressPrefix = 16;
+        optional uint32 DefaultgatewayNoAdv = 17;
+        optional uint32 PreferredValue = 18;
+        optional uint32 NexthopVpn = 19;
+        message RouteLimit {
+            optional uint32 Number = 1;
+            optional uint32 Percentage = 2;
+            optional uint32 AlertOnly = 3;
+            optional uint32 Discard = 4;
+            optional uint32 Reconnect = 5;
+        }
+        repeated RouteLimit routelimit = 20;
+    }
+    repeated NeighborGroup neighborgroup = 1;
+}
+message BGPNeighbors {
+    message Neighbor {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 Family = 3;
+        optional uint32 SessAF = 4;
+        optional string IpAddress = 5;
+        optional uint32 Mask = 6;
+        optional string RtPolicyImport = 7;
+        optional string RtPolicyExport = 8;
+        optional uint32 AllowAsLoop = 9;
+        optional uint32 ReflectClient = 10;
+        optional uint32 NexthopInvariable = 11;
+        optional uint32 NexthopLocal = 12;
+        optional uint32 RouterMacLocal = 13;
+        optional uint32 AdvertiseCommunity = 14;
+        optional uint32 AdvertiseExtCommunity = 15;
+        optional uint32 ReOriginated = 16;
+        optional uint32 AdvEvpnRouteSuppressMac = 17;
+        optional uint32 AdvEvpnRouteSuppressPrefix = 18;
+        optional uint32 DefaultgatewayNoAdv = 19;
+        optional uint32 PreferredValue = 20;
+        optional uint32 NexthopVpn = 21;
+        message RouteLimit {
+            optional uint32 Number = 1;
+            optional uint32 Percentage = 2;
+            optional uint32 AlertOnly = 3;
+            optional uint32 Discard = 4;
+            optional uint32 Reconnect = 5;
+        }
+        repeated RouteLimit routelimit = 22;
+    }
+    repeated Neighbor neighbor = 1;
+}
+message BGPRedistributes {
+    message Redist {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 Family = 3;
+        optional uint32 Protocol = 4;
+        optional string RedistName = 5;
+        optional uint32 AllowDirect = 6;
+        optional uint32 Med = 7;
+        optional string RoutePolicy = 8;
+    }
+    repeated Redist redist = 1;
+}
+message BGPSessionCounts {
+    message SessionCount {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 State = 3;
+        optional uint32 Count = 4;
+    }
+    repeated SessionCount sessioncount = 1;
+}
+message BGPNeighborInformations {
+    message NeighborInformation {
+        optional string Name = 1;
+        optional string VRF = 2;
+        optional uint32 Family = 3;
+        optional uint32 SessAF = 4;
+        optional string IpAddress = 5;
+        optional uint32 OutQPrefixCnt = 6;
+        optional uint32 RcvdPrefixCnt = 7;
+        optional uint32 RcvdUnReachNLRI = 8;
+        optional uint32 RcvdReachNLRI = 9;
+        optional uint32 SentUnReachNLRI = 10;
+        optional uint32 SentReachNLRI = 11;
+        optional uint32 RouteLimitNumber = 12;
+        optional uint32 Percentage = 13;
+        optional uint32 PreferredValue = 14;
+        optional string RtPolicyImport = 15;
+        optional string RtPolicyExport = 16;
+        optional uint32 AllowAsLoop = 17;
+        optional uint32 ReflectClient = 18;
+        optional uint32 NexthopInvariable = 19;
+        optional uint32 NexthopLocal = 20;
+        optional uint32 RouterMacLocal = 21;
+        optional uint32 AdvertiseCommunity = 22;
+        optional uint32 AdvertiseExtCommunity = 23;
+        optional uint32 ReOriginated = 24;
+        optional uint32 AdvEvpnRouteSuppressMac = 25;
+        optional uint32 AdvEvpnRouteSuppressPrefix = 26;
+        optional uint32 DefaultgatewayNoAdv = 27;
+    }
+    repeated NeighborInformation neighborinformation = 1;
+}
+message bgp_operations_to_controller {
+    message Operation {
+        optional uint32 OperationType = 1;
+        optional string Name = 2;
+    }
+    repeated Operation operation = 1;
+}
+message bgp_report_route_to_controller {
+    message ReportRoute {
+        optional string RouteAttr = 1;
+        optional string Name = 2;
+        optional string VRF = 3;
+        optional uint32 OperationType = 4;
+        optional uint32 RouteType = 5;
+        optional string RouteKey = 6;
+        optional string RouteSegment = 7;
+    }
+    repeated ReportRoute reportroute = 1;
+}
+message bgp_report_sessionstate_to_controller {
+    message ReportSessionstate {
+        optional uint32 CurrentState = 1;
+        optional uint32 LastState = 2;
+        optional string Name = 3;
+        optional string VRF = 4;
+        optional uint32 AF = 5;
+        optional string IpAddress = 6;
+    }
+    repeated ReportSessionstate reportsessionstate = 1;
+}
+message EventStream {
+    optional string stream_name = 1;
+}
+service BGPService {
+    rpc GetJsonBGPInstances(BGPInstances) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPVRFs(BGPVRFs) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPCfgSessionGroups(BGPCfgSessionGroups) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPCfgSessions(BGPCfgSessions) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPSessions(BGPSessions) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPFamilys(BGPFamilys) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPNetworks(BGPNetworks) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPAggregates(BGPAggregates) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPNeighborGroups(BGPNeighborGroups) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPNeighbors(BGPNeighbors) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPRedistributes(BGPRedistributes) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPSessionCounts(BGPSessionCounts) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonBGPNeighborInformations(BGPNeighborInformations) returns (grpc_service.GetJsonReply) {}
+    rpc Subscribebgp_operations_to_controller(bgp_operations_to_controller) returns (grpc_service.SubscribeReply) {}
+    rpc Subscribebgp_report_route_to_controller(bgp_report_route_to_controller) returns (grpc_service.SubscribeReply) {}
+    rpc Subscribebgp_report_sessionstate_to_controller(bgp_report_sessionstate_to_controller) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeEventStream(EventStream) returns (grpc_service.SubscribeReply) {}
+}

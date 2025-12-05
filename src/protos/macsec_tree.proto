@@ -1,0 +1,131 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  macsec;
+message MACSECMACSECGlobal {
+    optional bool SessionLogState = 1;
+}
+message MACSECMACSECInterfaces {
+    message MACSECInterface {
+        optional string IfName = 1;
+        optional bool MacsecSupport = 2;
+        optional uint32 CipherSuite = 3;
+        optional uint32 ConfidentialityOffset = 4;
+        optional bool DesireState = 5;
+        optional bool ReplayProtectionState = 6;
+        optional uint32 ReplayProtectionSize = 7;
+        optional uint32 ValidationMode = 8;
+        optional bool MkaEnableState = 9;
+        optional string AppliedPolicy = 10;
+        optional uint32 MkaPriority = 11;
+        optional uint32 MkaLife = 12;
+        optional bool ProtectFrameState = 13;
+        optional string ActivePolicy = 14;
+        optional bool IncludeSCI = 15;
+        optional bool SCIConflict = 16;
+        message MkaPsk {
+            optional string Ckn = 1;
+        }
+        repeated MkaPsk mkapsk = 17;
+        message TxSC {
+            optional string SCI = 1;
+            optional uint32 ElapseTimeHour = 2;
+            optional uint32 ElapseTimeMinute = 3;
+            optional uint32 ElapseTimeSecond = 4;
+            optional uint32 CurrentSAAN = 5;
+            optional uint32 CurrentSAPN = 6;
+        }
+        repeated TxSC txsc = 18;
+        message RxSC {
+            optional string SCI = 1;
+            optional uint32 ElapseTimeHour = 2;
+            optional uint32 ElapseTimeMinute = 3;
+            optional uint32 ElapseTimeSecond = 4;
+            optional uint32 CurrentSAAN = 5;
+            optional uint32 CurrentSALPN = 6;
+            optional uint32 PreviousSAAN = 7;
+            optional uint32 PreviousSALPN = 8;
+        }
+        repeated RxSC rxsc = 19;
+    }
+    repeated MACSECInterface macsecinterface = 1;
+}
+message MACSECMACSECMkaSessionInterfaces {
+    message MACSECMkaSessionInterface {
+        optional string IfName = 1;
+        optional string TxSCI = 2;
+        optional uint32 Priority = 3;
+        optional uint32 Capability = 4;
+        optional string ParticipantCKN = 5;
+        optional bool KeyServer = 6;
+        optional string MI = 7;
+        optional uint32 LivePeers = 8;
+        optional uint32 PotentoalPeers = 9;
+        optional bool PrincipalActor = 10;
+        optional uint32 MkaSessionState = 11;
+        optional uint32 ConfidentialityOffset = 12;
+        optional uint32 CurrentSAKStatus = 13;
+        optional uint32 CurrentSAKAN = 14;
+        optional string CurrentSAKKI = 15;
+        optional uint32 PreviousSAKStatus = 16;
+        optional uint32 PreviousSAKAN = 17;
+        optional string PreviousSAKKI = 18;
+    }
+    repeated MACSECMkaSessionInterface macsecmkasessioninterface = 1;
+        message LivePeerLists {
+            message LivePeerList {
+                optional string IfName = 1;
+                optional string MI = 2;
+                optional uint32 MN = 3;
+                optional uint32 Priority = 4;
+                optional uint32 Capability = 5;
+                optional string RxSCI = 6;
+            }
+            repeated LivePeerList livepeerlist = 1;
+        }
+        optional LivePeerLists livepeerlists = 19;
+        message PotentialPeerLists {
+            message PotentialPeerList {
+                optional string IfName = 1;
+                optional string MI = 2;
+                optional uint32 MN = 3;
+                optional uint32 Priority = 4;
+                optional uint32 Capability = 5;
+                optional string RxSCI = 6;
+            }
+            repeated PotentialPeerList potentialpeerlist = 1;
+        }
+        optional PotentialPeerLists potentialpeerlists = 20;
+}
+message MACSECMACSECMkaStatInterfaces {
+    message MACSECMkaStatInterface {
+        optional string IfName = 1;
+        optional uint32 InvalidCKN = 2;
+        optional uint32 InvalidICV = 3;
+        optional string ParticipantCKN = 4;
+        optional uint32 TxPdus = 5;
+        optional uint32 RxPdus = 6;
+        optional uint32 InvalidMN = 7;
+        optional uint32 TxError = 8;
+        optional uint32 RxError = 9;
+        optional uint32 DistributedSAKs = 10;
+        optional uint32 ReceivedSAKs = 11;
+    }
+    repeated MACSECMkaStatInterface macsecmkastatinterface = 1;
+}
+message MACSECMACSECPolicies {
+    message MACSECPolicy {
+        optional string PolicyName = 1;
+        optional bool ReplayProtectionState = 2;
+        optional uint32 ReplayProtectionSize = 3;
+        optional uint32 ConfidentialityOffset = 4;
+        optional uint32 ValidationMode = 5;
+    }
+    repeated MACSECPolicy macsecpolicy = 1;
+}
+service MACSECService {
+    rpc GetJsonMACSECMACSECGlobal(MACSECMACSECGlobal) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMACSECMACSECInterfaces(MACSECMACSECInterfaces) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMACSECMACSECMkaSessionInterfaces(MACSECMACSECMkaSessionInterfaces) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMACSECMACSECMkaStatInterfaces(MACSECMACSECMkaStatInterfaces) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMACSECMACSECPolicies(MACSECMACSECPolicies) returns (grpc_service.GetJsonReply) {}
+}

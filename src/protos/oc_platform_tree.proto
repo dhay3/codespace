@@ -1,0 +1,19 @@
+syntax = "proto2";
+import "grpc_service.proto";
+import "oc_chip_tree.proto";
+package  components_namespace;
+
+message components_component_integrated_circuit {
+	optional string name = 1;
+	optional chip_namespace.chip chip = 2;
+}
+message components_component {
+	optional string name = 1;
+	optional components_component_integrated_circuit integrated_circuit = 2;
+}
+message components {
+    repeated components_component component = 1;
+}
+service componentsService {
+    rpc GetJsoncomponents(components) returns (grpc_service.GetJsonReply) {}
+}

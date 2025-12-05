@@ -1,0 +1,45 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  ied;
+message IedIedConfiguration {
+    optional bool State = 1;
+    optional string IedName = 2;
+}
+message IedForwardState {
+    optional bool State = 1;
+}
+message IedGoose {
+    optional bool State = 1;
+    optional bool Bypass = 2;
+}
+message IedMms {
+    optional bool State = 1;
+    optional uint32 Port = 2;
+}
+message IedCms {
+    optional bool State = 1;
+}
+message IedCsd {
+    optional bool State = 1;
+}
+message IedSv {
+    optional bool Bypass = 1;
+}
+message IedInterfaces {
+    message Interface {
+        optional string IfName = 1;
+        optional uint32 InputDelay = 2;
+        optional uint32 OutputDelay = 3;
+    }
+    repeated Interface interface = 1;
+}
+service IedService {
+    rpc GetJsonIedIedConfiguration(IedIedConfiguration) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonIedForwardState(IedForwardState) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonIedGoose(IedGoose) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonIedMms(IedMms) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonIedCms(IedCms) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonIedCsd(IedCsd) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonIedSv(IedSv) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonIedInterfaces(IedInterfaces) returns (grpc_service.GetJsonReply) {}
+}

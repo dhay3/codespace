@@ -1,0 +1,57 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package qos_namespace;
+message qos_interfaces_interface_state {
+    optional string interface_id = 1;
+}
+message qos_interfaces_interface_input_queues_queue_state {
+    optional string parent_name = 1;
+    optional string name = 2;
+    optional uint64 pfc_pkts = 3;
+    optional uint64 ecn_sign_pkts = 4;
+	optional uint64 wred_drop_pkts = 5;
+}
+message qos_interfaces_interface_input_queues_queue {
+	optional string parent_name = 1;
+	optional string name = 2;
+	optional qos_interfaces_interface_input_queues_queue_state state = 3;
+}
+message qos_interfaces_interface_input_queues {
+	repeated  qos_interfaces_interface_input_queues_queue queue = 1;
+}
+message qos_interfaces_interface_input {
+	optional qos_interfaces_interface_input_queues queues = 1;
+}
+message qos_interfaces_interface_output_queues_queue_state {
+	optional string parent_name = 1;
+	optional string name = 2;
+	optional uint64 pfc_pkts = 3;
+	optional uint64 ecn_sign_pkts = 4;
+	optional uint64 wred_drop_pkts = 5;
+}
+message qos_interfaces_interface_output_queues_queue {
+	optional string parent_name = 1;
+	optional string name = 2;
+	optional qos_interfaces_interface_output_queues_queue_state state = 3;
+}
+message qos_interfaces_interface_output_queues {
+	repeated qos_interfaces_interface_output_queues_queue queue = 1;
+}
+message qos_interfaces_interface_output {
+	optional qos_interfaces_interface_output_queues queues = 1;
+}
+message qos_interfaces_interface {
+	optional string interface_id = 1;
+	optional qos_interfaces_interface_state state = 2;
+	optional qos_interfaces_interface_input input = 3;
+	optional qos_interfaces_interface_output output = 4;
+}
+message qos_interfaces {
+	repeated qos_interfaces_interface interface = 1;
+}
+message qos {
+    optional qos_interfaces interfaces = 1;
+}
+service qosService {
+    rpc GetJsonqos(qos) returns (grpc_service.GetJsonReply) {}
+}

@@ -1,0 +1,112 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  tcb;
+message TCBPortConfigurations {
+    message PortConfiguration {
+        optional uint32 IfIndex = 1;  //索引项, 接口索引
+        optional string IfName = 2;   //接口名称
+        optional uint32 Type = 3;     //1表示发送缓冲区（即抓ingress方向的丢包），2表示接收缓冲区（即抓egress方向的丢包）
+        optional uint32 QueNum = 4;   //发送缓冲区队列编号(取值范围0~7)
+        optional uint32 IsLocalAnalysis = 5; //是否本地分析，1表示本地分析上报，0表示原始数据上报
+        optional string GroupIndex = 6;   //ACL规则，填入编号则范围为3000~3999，可填入ACL规则名称
+        optional uint32 PollFrequency = 7; //每分钟上报次数，取值范围、默认值和实际生效值与产品有关
+        message Threshold {
+            optional uint32 StartThreshold = 1; //开始抓包的队列长度门限值，取值范围和默认值与产品有关，单位是字节
+            optional uint32 StopThreshold = 2; //停止抓包的队列长度门限值，取值范围和默认值与产品有关，单位是字节
+        }
+        repeated Threshold threshold = 8; 
+        message Freeze {
+            optional uint32 FreezeNum = 1;   //表示抓包数量，达到本门限值时进入冻结状态。取值范围和缺省值与产品有关
+            optional uint32 FreezeTime = 2;  //表示抓包时间，达到本门限值时进入冻结状态。取值范围和缺省值与产品有关，单位为微秒
+        }
+        repeated Freeze freeze = 9;
+        message Sample {
+            optional uint32 PreSampleRate = 1;  //表示TCB功能处于预触发状态时的采样率。取值范围与产品有关，缺省值与产品有关。例如取值范围为1~16，配置值表示每16个报文中采样报文的个数，16表示全部采样
+            optional uint32 PostSampleRate = 2; //表示TCB功能处于触发状态时的采样率。取值范围与产品有关，缺省值与产品有关。例如取值范围为1~16，配置值表示每16个报文中采样报文的个数，16表示全部采样
+        }
+        repeated Sample sample = 10;
+    }
+    repeated PortConfiguration portconfiguration = 1;
+}
+message TCBSlotConfigurations {
+    message SlotConfiguration {
+        optional uint32 Chassis = 1;  //索引项, 接口索引
+        optional uint32 Slot = 2;  //索引项, 接口索引
+        optional uint32 CPUID = 3;  //索引项, 接口索引
+        optional uint32 Type = 4;  //1表示发送缓冲区（即抓ingress方向的丢包,目前不支持），2表示接收缓冲区（即抓egress方向的丢包）
+        optional uint32 IsLocalAnalysis = 5; //是否本地分析，1表示本地分析上报，0表示原始数据上报
+        optional string GroupIndex = 6;  //ACL规则，填入编号则范围为3000~3999，可填入ACL规则名称
+        optional uint32 PollFrequency = 7; //每分钟上报次数，取值范围、默认值和实际生效值与产品有关
+        message Threshold {
+            optional uint32 StartThreshold = 1; //开始抓包的队列长度门限值，取值范围和默认值与产品有关，单位是字节
+            optional uint32 StopThreshold = 2; //停止抓包的队列长度门限值，取值范围和默认值与产品有关，单位是字节
+        }
+        repeated Threshold threshold = 8;
+        message Freeze {
+            optional uint32 FreezeNum = 1; //表示抓包数量，达到本门限值时进入冻结状态。取值范围和缺省值与产品有关
+            optional uint32 FreezeTime = 2; //表示抓包时间，达到本门限值时进入冻结状态。取值范围和缺省值与产品有关，单位为微秒
+        }
+        repeated Freeze freeze = 9;
+        message Sample {
+            optional uint32 PreSampleRate = 1;  //表示TCB功能处于预触发状态时的采样率。取值范围与产品有关，缺省值与产品有关。例如取值范围为1~16，配置值表示每16个报文中采样报文的个数，16表示全部采样
+            optional uint32 PostSampleRate = 2; //表示TCB功能处于触发状态时的采样率。取值范围与产品有关，缺省值与产品有关。例如取值范围为1~16，配置值表示每16个报文中采样报文的个数，16表示全部采样
+        }
+        repeated Sample sample = 10;
+    }
+    repeated SlotConfiguration slotconfiguration = 1;
+}
+message TCBPacketInfoEvent {
+    message TCBPacketInfo {
+        message Global {
+            optional string IfName = 1;   //接口名称
+            optional uint32 Type = 2;    //1表示发送缓冲区（即抓ingress方向的丢包），2表示接收缓冲区（即抓egress方向的丢包）
+            optional uint32 QueNum = 3;  //发送缓冲区队列编号(取值范围0~7)
+            optional uint32 TupleFilterType = 4; //1表示使用表示ACL过滤，0表示未使用ACL过滤
+            optional uint32 InterruptType = 5;  //中断类型，0表示包中断，1表示硬件定时器中断，2表示软件定时器中断
+            optional uint32 TupleTypeCount = 6;  //表示TCBData的元素个数，即不同五元组（源IP、目的IP、源端口、目的端口、协议号）的个数
+        }
+        repeated Global global = 1;
+        message TCBData {
+            optional uint64 StartTimeStamp = 1;  //IEEE1588V1格式时间戳
+            optional uint32 TupleID = 2;  //TCBData的序号
+            optional uint32 DropReason = 3; //丢包原因，按位进行位或
+                                            //1-Ingress admission drop
+                                            //2-Egress admission drop
+                                            //4-Weighted random drop
+                                            //8-Cell free allocations pool drop
+
+            optional uint32 ProtocolNo = 4; //IP头的协议号
+            optional uint32 SourcePort = 5; //源端口
+            optional uint32 DestPort = 6; //目的端口
+            optional string SourceIP = 7; //源IP
+            optional string DestIP = 8; //目的IP
+            optional uint32 DropCount = 9; //丢包数量
+        }
+        repeated TCBData tcbdata = 2;
+    }
+    repeated TCBPacketInfo tcbpacketinfo = 1;
+}
+message TCBRawPacketInfoEvent {
+    message TCBRawPacketInfo {
+        optional string IfName = 1;  //接口名称
+        optional uint32 Type = 2;   //1表示发送缓冲区（即抓ingress方向的丢包），2表示接收缓冲区（即抓egress方向的丢包）
+        optional uint32 QueNum = 3;  //发送缓冲区队列编号(取值范围0~7)
+        optional uint32 TupleFilterType = 4; //1表示使用表示ACL过滤，0表示为使用ACL过滤
+        optional uint32 InterruptType = 5; //中断类型，0表示包中断，1表示硬件定时器中断，2表示软件定时器中断
+        optional uint32 TupleTypeCount = 6; //表示TCBData的元素个数，即不同五元组（源IP、目的IP、源端口、目的端口、协议号）的个数
+        optional uint32 TCBBufCount = 7; //表示TCB Buffer的元素个数
+        optional string TCBBufData = 8;  //TCB buffer 十六进制数据转字符串数据
+        optional uint32 TCBDropCount = 9; //表示Event Buffer的元素个数
+        optional string EventBufData = 10; //Event buffer 十六进制数据转字符串数据
+    }
+    repeated TCBRawPacketInfo tcbrawpacketinfo = 1;
+}
+message EventStream {
+    optional string stream_name = 1;
+}
+service TCBService {
+    rpc GetJsonTCBPortConfigurations(TCBPortConfigurations) returns (grpc_service.GetJsonReply) {}
+    rpc SubscribeTCBPacketInfoEvent(TCBPacketInfoEvent) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeTCBRawPacketInfoEvent(TCBRawPacketInfoEvent) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeEventStream(EventStream) returns (grpc_service.SubscribeReply) {}
+}

@@ -1,0 +1,109 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  lagg;
+message LAGGCapabilities {
+    message Capability {
+        optional uint32 MaxGroup = 1;
+        optional string MaxSelectPortList = 2;
+    }
+    repeated Capability capability = 1;
+}
+message LAGGLoadSharing {
+    optional uint32 GroupId = 1;
+    optional uint32 Ingress_port = 2;
+    optional int32 Forwarding = 3;
+    optional string Destination_ip = 4;
+    optional string Destination_ipv6 = 5;
+    optional string Source_ip = 6;
+    optional string Source_ipv6 = 7;
+    optional string Destination_mac = 8;
+    optional uint32 Destination_port = 9;
+    optional uint32 Ethernet_type = 10;
+    optional int32 Ip_protocol = 11;
+    optional string Source_mac = 12;
+    optional uint32 Source_port = 13;
+    optional uint32 Vlan = 14;
+    optional uint32 Mpls_label_number = 15;
+    optional uint32 Egress_Port = 16;
+}
+message LAGGBase {
+    optional string SystemID = 1;
+    optional uint32 SystemPriority = 2;
+    optional uint64 LoadSharingMode = 3;
+    optional string ManagementVlanList = 4;
+    optional bool AutoAggregationEnable = 5;
+    optional uint64 LoadSharingAlgorithm = 6;
+    message Capability {
+        optional uint32 MaxGroupNum = 1;
+        optional uint32 MaxSelectPortNum = 2;
+    }
+    repeated Capability capability = 7;
+}
+message LAGGLAGGGroups {
+    message LAGGGroup {
+        optional uint32 GroupId = 1;
+        optional uint32 LinkMode = 2;
+        optional uint32 IfIndex = 3;
+        optional string MemberList = 4;
+        optional string SelectedMemberList = 5;
+        optional bool LacpEdgeEnable = 6;
+        optional uint64 LoadSharingMode = 7;
+        optional string PartnerSystemID = 8;
+        optional uint32 PartnerSystemPriority = 9;
+        optional uint32 ManagementPort = 10;
+        message DynamicLoadSharing {
+            optional uint64 Mode = 1;
+            optional uint32 FlowletGapTime = 2;
+        }
+        repeated DynamicLoadSharing dynamicloadsharing = 11;
+    }
+    repeated LAGGGroup lagggroup = 1;
+}
+message LAGGLAGGMembers {
+    message LAGGMember {
+        optional uint32 IfIndex = 1;
+        optional uint32 GroupId = 2;
+        optional uint32 SelectedStatus = 3;
+        optional uint32 UnSelectedReason = 4;
+        optional bool LacpEnable = 5;
+        optional uint32 LacpMode = 6;
+        optional bool LacpShortPeriodEnable = 7;
+        optional uint32 ActorPortPriority = 8;
+        optional int32 ActorState = 9;
+        optional uint32 ActorOperKey = 10;
+        optional uint32 ActorPort = 11;
+        optional string PartnerSystemID = 12;
+        optional uint32 PartnerSystemPriority = 13;
+        optional uint32 PartnerPortPriority = 14;
+        optional int32 PartnerState = 15;
+        optional uint32 PartnerOperKey = 16;
+        optional uint32 PartnerPort = 17;
+        optional bool ManagementPortEnable = 18;
+        optional bool LacpTransparentEnable = 19;
+    }
+    repeated LAGGMember laggmember = 1;
+}
+message LAGGCustomizedCapacity {
+    optional uint32 MaxLoadSharingAlgorithm = 1;
+}
+message MemberEvent {
+    message MemberInfo {
+        optional string IfName = 1;
+        optional string IfAggName = 2;
+        optional uint32 State = 3;
+    }
+    repeated MemberInfo memberinfo = 1;
+}
+message EventStream {
+    optional string stream_name = 1;
+}
+service LAGGService {
+    rpc GetJsonLAGGCapabilities(LAGGCapabilities) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonLAGGLoadSharing(LAGGLoadSharing) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonLAGGBase(LAGGBase) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonLAGGLAGGGroups(LAGGLAGGGroups) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonLAGGLAGGMembers(LAGGLAGGMembers) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonLAGGCustomizedCapacity(LAGGCustomizedCapacity) returns (grpc_service.GetJsonReply) {}
+    rpc SubscribeMemberEvent(MemberEvent) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeEventStream(EventStream) returns (grpc_service.SubscribeReply) {}
+}

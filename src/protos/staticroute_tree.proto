@@ -1,0 +1,64 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  staticroute;
+message StaticRouteIpv4StaticRouteConfigurations {
+    message RouteEntry {
+        optional uint32 DestVrfIndex = 1;
+        optional uint32 DestTopologyIndex = 2;
+        optional string Ipv4Address = 3;
+        optional uint32 Ipv4PrefixLength = 4;
+        optional uint32 NexthopVrfIndex = 5;
+        optional string NexthopIpv4Address = 6;
+        optional uint32 IfIndex = 7;
+        optional uint32 Tag = 8;
+        optional uint32 Preference = 9;
+        optional string Description = 10;
+        optional bool Permanent = 11;
+        optional bool RecursiveHost = 12;
+        optional uint32 TrackEntryID = 13;
+        optional uint32 RecursiveLookup = 14;
+        optional uint32 FIRType = 15;
+        optional uint32 Threshold = 16;
+        message BackupPathAttribute {
+            optional uint32 BackupIfIndex = 1;
+            optional string BackupNexthopIpv4Address = 2;
+        }
+        repeated BackupPathAttribute backuppathattribute = 17;
+        message BfdAttribute {
+            optional uint32 BfdWorkMode = 1;
+            optional string BfdSourceIpv4Address = 2;
+        }
+        repeated BfdAttribute bfdattribute = 18;
+    }
+    repeated RouteEntry routeentry = 1;
+}
+message StaticRouteIpv6StaticRouteConfigurations {
+    message RouteEntry {
+        optional uint32 DestVrfIndex = 1;
+        optional uint32 DestTopologyIndex = 2;
+        optional string Ipv6Address = 3;
+        optional uint32 Ipv6PrefixLength = 4;
+        optional uint32 NexthopVrfIndex = 5;
+        optional string NexthopIpv6Address = 6;
+        optional uint32 IfIndex = 7;
+        optional uint32 Tag = 8;
+        optional uint32 Preference = 9;
+        optional string Description = 10;
+        optional bool Permanent = 11;
+        optional bool RecursiveHost = 12;
+        optional uint32 TrackEntryID = 13;
+        optional uint32 RecursiveLookup = 14;
+        optional uint32 FIRType = 15;
+        optional uint32 Threshold = 16;
+        message BfdAttribute {
+            optional uint32 BfdWorkMode = 1;
+            optional string BfdSourceIpv6Address = 2;
+        }
+        repeated BfdAttribute bfdattribute = 17;
+    }
+    repeated RouteEntry routeentry = 1;
+}
+service StaticRouteService {
+    rpc GetJsonStaticRouteIpv4StaticRouteConfigurations(StaticRouteIpv4StaticRouteConfigurations) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonStaticRouteIpv6StaticRouteConfigurations(StaticRouteIpv6StaticRouteConfigurations) returns (grpc_service.GetJsonReply) {}
+}

@@ -1,0 +1,92 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  sqa;
+message SQACallStatistics {
+    message CallStatistics {
+        optional uint64 Succeed = 1;
+        optional uint64 Timeout = 2;
+        optional uint64 Error = 3;
+        optional uint64 Abnormal = 4;
+        optional uint32 AppProto = 5;
+    }
+    repeated CallStatistics callstatistics = 1;
+}
+message CallEvent {
+    message Call {
+        optional string CallID = 1;
+        optional uint32 VlanID = 2;
+        optional string CallerIP = 3;
+        optional uint32 CallerPort = 4;
+        optional string CallerMAC = 5;
+        optional string ReplierIP = 6;
+        optional uint32 ReplierPort = 7;
+        optional string ReplierMAC = 8;
+        optional uint32 IPProto = 9;
+        optional uint32 MediaType = 10;
+        optional string StartTime = 11;
+        optional string EndTime = 12;
+        optional uint32 State = 13;
+        optional uint32 AppProto = 14;
+        optional string GUID = 15;
+        optional uint32 VxlanID = 16;
+        optional string AliasAddress = 17;
+    }
+    repeated Call call = 1;
+}
+message CallTrafficEvent {
+    message CallTraffic {
+        optional uint64 Audio = 1;
+        optional uint64 Video = 2;
+        optional string StartTime = 3;
+        optional string EndTime = 4;
+        optional uint32 AppProto = 5;
+    }
+    repeated CallTraffic calltraffic = 1;
+}
+message BidirectionalCallEvent {
+    message BidirectionalCall {
+        optional string CallID = 1;
+        optional uint32 VlanID = 2;
+        optional string InboundIfIndex = 3;
+        optional string CallerIP = 4;
+        optional uint32 CallerPort = 5;
+        optional string ReplierIP = 6;
+        optional uint32 ReplierPort = 7;
+        optional uint32 IPProto = 8;
+        optional uint32 CallerMOS = 9;
+        optional uint32 ReplierMOS = 10;
+        optional uint64 CallerTraffic = 11;
+        optional uint64 ReplierTraffic = 12;
+        optional uint32 CallerRTPLR = 13;
+        optional uint32 CallerRTPSER = 14;
+        optional uint32 CallerRTPLP = 15;
+        optional uint32 CallerJitter = 16;
+        optional uint32 CallerRatePps = 17;
+        optional uint64 CallerRateBps = 18;
+        optional uint32 ReplierRTPLR = 19;
+        optional uint32 ReplierRTPSER = 20;
+        optional uint32 ReplierRTPLP = 21;
+        optional uint32 ReplierJitter = 22;
+        optional uint32 ReplierRatePps = 23;
+        optional uint64 ReplierRateBps = 24;
+        optional uint32 DRTT = 25;
+        optional uint32 URTT = 26;
+        optional string StartTime = 27;
+        optional string EndTime = 28;
+        optional uint32 AppProto = 29;
+        optional string GUID = 30;
+        optional uint32 VxlanID = 31;
+        optional string AliasAddress = 32;
+    }
+    repeated BidirectionalCall bidirectionalcall = 1;
+}
+message EventStream {
+    optional string stream_name = 1;
+}
+service SQAService {
+    rpc GetJsonSQACallStatistics(SQACallStatistics) returns (grpc_service.GetJsonReply) {}
+    rpc SubscribeCallEvent(CallEvent) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeCallTrafficEvent(CallTrafficEvent) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeBidirectionalCallEvent(BidirectionalCallEvent) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeEventStream(EventStream) returns (grpc_service.SubscribeReply) {}
+}

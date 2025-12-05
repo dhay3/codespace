@@ -1,0 +1,24 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  arp_event;
+message ArpTableEvent {
+    message ArpTable {
+        optional uint32 IfIndex = 1;
+        optional string Ipv4Address = 2;
+        optional string MacAddress = 3;
+        optional uint32 VLANID = 4;
+        optional uint32 VXLANID = 5;
+        optional uint32 PortIndex = 6;
+        optional uint32 VrfIndex = 7;
+        optional uint32 ArpType = 8;
+        optional uint32 Sequence = 9;
+    }
+    repeated ArpTable arptable = 1;
+}
+message EventStream {
+    optional string stream_name = 1;
+}
+service arp_eventService {
+    rpc SubscribeArpTableEvent(ArpTableEvent) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeEventStream(EventStream) returns (grpc_service.SubscribeReply) {}
+}

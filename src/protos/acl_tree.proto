@@ -1,0 +1,856 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  acl;
+message ACLBase {
+    optional uint32 ProcessingStatus = 1;
+}
+message ACLCapability {
+    message UserAclL2 {
+        optional uint32 L2MaxOffset = 1;
+        optional uint32 L2MaxLen = 2;
+    }
+    repeated UserAclL2 useracll2 = 1;
+    message UserAclL4 {
+        optional uint32 L4MaxOffset = 1;
+        optional uint32 L4MaxLen = 2;
+    }
+    repeated UserAclL4 useracll4 = 2;
+    message UserAclIPv4 {
+        optional uint32 IPv4MaxOffset = 1;
+        optional uint32 IPv4MaxLen = 2;
+    }
+    repeated UserAclIPv4 useraclipv4 = 3;
+    message UserAclIPv6 {
+        optional uint32 IPv6MaxOffset = 1;
+        optional uint32 IPv6MaxLen = 2;
+    }
+    repeated UserAclIPv6 useraclipv6 = 4;
+}
+message ACLGroups {
+    message Group {
+        optional uint32 GroupType = 1;
+        optional uint32 GroupID = 2;
+        optional uint32 MatchOrder = 3;
+        optional uint32 Step = 4;
+        optional string Name = 5;
+        optional string Description = 6;
+        optional uint32 RuleNum = 7;
+    }
+    repeated Group group = 1;
+}
+message ACLNamedGroups {
+    message Group {
+        optional uint32 GroupType = 1;
+        optional uint32 GroupCategory = 2;
+        optional string GroupIndex = 3;
+        optional uint32 MatchOrder = 4;
+        optional uint32 Step = 5;
+        optional string Description = 6;
+        optional string Name = 7;
+        optional uint32 RuleNum = 8;
+    }
+    repeated Group group = 1;
+}
+message ACLIPv4BasicRules {
+    message Rule {
+        optional uint32 GroupID = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional bool SrcAny = 4;
+        optional bool Fragment = 5;
+        optional string TimeRange = 6;
+        optional string VRF = 7;
+        optional bool Counting = 8;
+        optional bool Logging = 9;
+        optional string Comment = 10;
+        optional uint32 Status = 11;
+        optional uint64 Count = 12;
+        optional uint32 MatchIndex = 13;
+        message SrcIPv4 {
+            optional string SrcIPv4Addr = 1;
+            optional string SrcIPv4Wildcard = 2;
+        }
+        repeated SrcIPv4 srcipv4 = 14;
+    }
+    repeated Rule rule = 1;
+}
+message ACLIPv4NamedBasicRules {
+    message Rule {
+        optional string GroupIndex = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional bool SrcAny = 4;
+        optional bool Fragment = 5;
+        optional string TimeRange = 6;
+        optional string VRF = 7;
+        optional bool Counting = 8;
+        optional bool Logging = 9;
+        optional string Comment = 10;
+        optional uint32 Status = 11;
+        optional uint64 Count = 12;
+        optional uint32 MatchIndex = 13;
+        message SrcIPv4 {
+            optional string SrcIPv4Addr = 1;
+            optional string SrcIPv4Wildcard = 2;
+        }
+        repeated SrcIPv4 srcipv4 = 14;
+    }
+    repeated Rule rule = 1;
+}
+message ACLIPv6BasicRules {
+    message Rule {
+        optional uint32 GroupID = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional bool SrcAny = 4;
+        optional bool RoutingTypeAny = 5;
+        optional uint32 RoutingTypeValue = 6;
+        optional bool Fragment = 7;
+        optional string TimeRange = 8;
+        optional string VRF = 9;
+        optional bool Counting = 10;
+        optional bool Logging = 11;
+        optional string Comment = 12;
+        optional uint32 Status = 13;
+        optional uint64 Count = 14;
+        optional uint32 MatchIndex = 15;
+        message SrcIPv6 {
+            optional string SrcIPv6Addr = 1;
+            optional uint32 SrcIPv6Prefix = 2;
+        }
+        repeated SrcIPv6 srcipv6 = 16;
+    }
+    repeated Rule rule = 1;
+}
+message ACLIPv6NamedBasicRules {
+    message Rule {
+        optional string GroupIndex = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional bool SrcAny = 4;
+        optional bool RoutingTypeAny = 5;
+        optional uint32 RoutingTypeValue = 6;
+        optional bool Fragment = 7;
+        optional string TimeRange = 8;
+        optional string VRF = 9;
+        optional bool Counting = 10;
+        optional bool Logging = 11;
+        optional string Comment = 12;
+        optional uint32 Status = 13;
+        optional uint64 Count = 14;
+        optional uint32 MatchIndex = 15;
+        message SrcIPv6 {
+            optional string SrcIPv6Addr = 1;
+            optional uint32 SrcIPv6Prefix = 2;
+        }
+        repeated SrcIPv6 srcipv6 = 16;
+    }
+    repeated Rule rule = 1;
+}
+message ACLIPv4AdvanceRules {
+    message Rule {
+        optional uint32 GroupID = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional uint32 ProtocolType = 4;
+        optional bool SrcAny = 5;
+        optional bool DstAny = 6;
+        optional uint32 DSCP = 7;
+        optional uint32 ECN = 8;
+        optional uint32 Precedence = 9;
+        optional uint32 TOS = 10;
+        optional bool Established = 11;
+        optional bool Fragment = 12;
+        optional string TimeRange = 13;
+        optional string VRF = 14;
+        optional uint32 QoSLocalID = 15;
+        optional uint32 EncapType = 16;
+        optional uint32 VxlanID = 17;
+        optional uint32 InProtocolType = 18;
+        optional bool InSrcAny = 19;
+        optional bool InDstAny = 20;
+        optional bool InEstablished = 21;
+        optional bool Counting = 22;
+        optional bool Logging = 23;
+        optional string Comment = 24;
+        optional uint32 Status = 25;
+        optional uint64 Count = 26;
+        optional uint32 MatchIndex = 27;
+        optional string GreValue = 28;
+        optional bool Options = 29;
+        optional uint32 FragmentType = 30;
+        message SrcIPv4 {
+            optional string SrcIPv4Addr = 1;
+            optional string SrcIPv4Wildcard = 2;
+        }
+        repeated SrcIPv4 srcipv4 = 31;
+        message DstIPv4 {
+            optional string DstIPv4Addr = 1;
+            optional string DstIPv4Wildcard = 2;
+        }
+        repeated DstIPv4 dstipv4 = 32;
+        message SrcPort {
+            optional uint32 SrcPortOp = 1;
+            optional uint32 SrcPortValue1 = 2;
+            optional uint32 SrcPortValue2 = 3;
+        }
+        repeated SrcPort srcport = 33;
+        message DstPort {
+            optional uint32 DstPortOp = 1;
+            optional uint32 DstPortValue1 = 2;
+            optional uint32 DstPortValue2 = 3;
+        }
+        repeated DstPort dstport = 34;
+        message TcpFlag {
+            optional uint32 ACK = 1;
+            optional uint32 FIN = 2;
+            optional uint32 PSH = 3;
+            optional uint32 RST = 4;
+            optional uint32 SYN = 5;
+            optional uint32 URG = 6;
+        }
+        repeated TcpFlag tcpflag = 35;
+        message ICMP {
+            optional uint32 ICMPType = 1;
+            optional uint32 ICMPCode = 2;
+        }
+        repeated ICMP icmp = 36;
+        message InSrcIPv4 {
+            optional string InSrcIPv4Addr = 1;
+            optional string InSrcIPv4Wildcard = 2;
+        }
+        repeated InSrcIPv4 insrcipv4 = 37;
+        message InDstIPv4 {
+            optional string InDstIPv4Addr = 1;
+            optional string InDstIPv4Wildcard = 2;
+        }
+        repeated InDstIPv4 indstipv4 = 38;
+        message InSrcPort {
+            optional uint32 InSrcPortOp = 1;
+            optional uint32 InSrcPortValue1 = 2;
+            optional uint32 InSrcPortValue2 = 3;
+        }
+        repeated InSrcPort insrcport = 39;
+        message InDstPort {
+            optional uint32 InDstPortOp = 1;
+            optional uint32 InDstPortValue1 = 2;
+            optional uint32 InDstPortValue2 = 3;
+        }
+        repeated InDstPort indstport = 40;
+    }
+    repeated Rule rule = 1;
+}
+message ACLIPv4NamedAdvanceRules {
+    message Rule {
+        optional string GroupIndex = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional uint32 ProtocolType = 4;
+        optional bool SrcAny = 5;
+        optional bool DstAny = 6;
+        optional uint32 DSCP = 7;
+        optional uint32 ECN = 8;
+        optional uint32 Precedence = 9;
+        optional uint32 TOS = 10;
+        optional bool Established = 11;
+        optional bool Fragment = 12;
+        optional string TimeRange = 13;
+        optional string VRF = 14;
+        optional uint32 QoSLocalID = 15;
+        optional uint32 EncapType = 16;
+        optional uint32 VxlanID = 17;
+        optional uint32 InProtocolType = 18;
+        optional bool InSrcAny = 19;
+        optional bool InDstAny = 20;
+        optional bool InEstablished = 21;
+        optional bool Counting = 22;
+        optional bool Logging = 23;
+        optional string Comment = 24;
+        optional uint32 Status = 25;
+        optional uint64 Count = 26;
+        optional uint32 MatchIndex = 27;
+        optional string GreValue = 28;
+        optional bool Options = 29;
+        optional uint32 FragmentType = 30;
+        message SrcIPv4 {
+            optional string SrcIPv4Addr = 1;
+            optional string SrcIPv4Wildcard = 2;
+        }
+        repeated SrcIPv4 srcipv4 = 31;
+        message DstIPv4 {
+            optional string DstIPv4Addr = 1;
+            optional string DstIPv4Wildcard = 2;
+        }
+        repeated DstIPv4 dstipv4 = 32;
+        message SrcPort {
+            optional uint32 SrcPortOp = 1;
+            optional uint32 SrcPortValue1 = 2;
+            optional uint32 SrcPortValue2 = 3;
+        }
+        repeated SrcPort srcport = 33;
+        message DstPort {
+            optional uint32 DstPortOp = 1;
+            optional uint32 DstPortValue1 = 2;
+            optional uint32 DstPortValue2 = 3;
+        }
+        repeated DstPort dstport = 34;
+        message TcpFlag {
+            optional uint32 ACK = 1;
+            optional uint32 FIN = 2;
+            optional uint32 PSH = 3;
+            optional uint32 RST = 4;
+            optional uint32 SYN = 5;
+            optional uint32 URG = 6;
+        }
+        repeated TcpFlag tcpflag = 35;
+        message ICMP {
+            optional uint32 ICMPType = 1;
+            optional uint32 ICMPCode = 2;
+        }
+        repeated ICMP icmp = 36;
+        message InSrcIPv4 {
+            optional string InSrcIPv4Addr = 1;
+            optional string InSrcIPv4Wildcard = 2;
+        }
+        repeated InSrcIPv4 insrcipv4 = 37;
+        message InDstIPv4 {
+            optional string InDstIPv4Addr = 1;
+            optional string InDstIPv4Wildcard = 2;
+        }
+        repeated InDstIPv4 indstipv4 = 38;
+        message InSrcPort {
+            optional uint32 InSrcPortOp = 1;
+            optional uint32 InSrcPortValue1 = 2;
+            optional uint32 InSrcPortValue2 = 3;
+        }
+        repeated InSrcPort insrcport = 39;
+        message InDstPort {
+            optional uint32 InDstPortOp = 1;
+            optional uint32 InDstPortValue1 = 2;
+            optional uint32 InDstPortValue2 = 3;
+        }
+        repeated InDstPort indstport = 40;
+    }
+    repeated Rule rule = 1;
+}
+message ACLIPv6AdvanceRules {
+    message Rule {
+        optional uint32 GroupID = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional uint32 ProtocolType = 4;
+        optional bool SrcAny = 5;
+        optional bool DstAny = 6;
+        optional uint32 DSCP = 7;
+        optional uint32 ECN = 8;
+        optional uint32 FlowLabel = 9;
+        optional bool RoutingTypeAny = 10;
+        optional uint32 RoutingTypeValue = 11;
+        optional bool Established = 12;
+        optional bool Fragment = 13;
+        optional bool HopTypeAny = 14;
+        optional uint32 HopTypeValue = 15;
+        optional string TimeRange = 16;
+        optional string VRF = 17;
+        optional uint32 QoSLocalID = 18;
+        optional bool Counting = 19;
+        optional bool Logging = 20;
+        optional string Comment = 21;
+        optional uint32 Status = 22;
+        optional uint64 Count = 23;
+        optional uint32 MatchIndex = 24;
+        optional string GreValue = 25;
+        optional bool Options = 26;
+        optional uint32 FragmentType = 27;
+        message SrcIPv6 {
+            optional string SrcIPv6Addr = 1;
+            optional uint32 SrcIPv6Prefix = 2;
+        }
+        repeated SrcIPv6 srcipv6 = 28;
+        message DstIPv6 {
+            optional string DstIPv6Addr = 1;
+            optional uint32 DstIPv6Prefix = 2;
+        }
+        repeated DstIPv6 dstipv6 = 29;
+        message SrcPort {
+            optional uint32 SrcPortOp = 1;
+            optional uint32 SrcPortValue1 = 2;
+            optional uint32 SrcPortValue2 = 3;
+        }
+        repeated SrcPort srcport = 30;
+        message DstPort {
+            optional uint32 DstPortOp = 1;
+            optional uint32 DstPortValue1 = 2;
+            optional uint32 DstPortValue2 = 3;
+        }
+        repeated DstPort dstport = 31;
+        message TcpFlag {
+            optional uint32 ACK = 1;
+            optional uint32 FIN = 2;
+            optional uint32 PSH = 3;
+            optional uint32 RST = 4;
+            optional uint32 SYN = 5;
+            optional uint32 URG = 6;
+        }
+        repeated TcpFlag tcpflag = 32;
+        message ICMP6 {
+            optional uint32 ICMP6Type = 1;
+            optional uint32 ICMP6Code = 2;
+        }
+        repeated ICMP6 icmp6 = 33;
+    }
+    repeated Rule rule = 1;
+}
+message ACLIPv6NamedAdvanceRules {
+    message Rule {
+        optional string GroupIndex = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional uint32 ProtocolType = 4;
+        optional bool SrcAny = 5;
+        optional bool DstAny = 6;
+        optional uint32 DSCP = 7;
+        optional uint32 ECN = 8;
+        optional uint32 FlowLabel = 9;
+        optional bool RoutingTypeAny = 10;
+        optional uint32 RoutingTypeValue = 11;
+        optional bool Established = 12;
+        optional bool Fragment = 13;
+        optional bool HopTypeAny = 14;
+        optional uint32 HopTypeValue = 15;
+        optional string TimeRange = 16;
+        optional string VRF = 17;
+        optional uint32 QoSLocalID = 18;
+        optional bool Counting = 19;
+        optional bool Logging = 20;
+        optional string Comment = 21;
+        optional uint32 Status = 22;
+        optional uint64 Count = 23;
+        optional uint32 MatchIndex = 24;
+        optional string GreValue = 25;
+        optional bool Options = 26;
+        optional uint32 FragmentType = 27;
+        message SrcIPv6 {
+            optional string SrcIPv6Addr = 1;
+            optional uint32 SrcIPv6Prefix = 2;
+        }
+        repeated SrcIPv6 srcipv6 = 28;
+        message DstIPv6 {
+            optional string DstIPv6Addr = 1;
+            optional uint32 DstIPv6Prefix = 2;
+        }
+        repeated DstIPv6 dstipv6 = 29;
+        message SrcPort {
+            optional uint32 SrcPortOp = 1;
+            optional uint32 SrcPortValue1 = 2;
+            optional uint32 SrcPortValue2 = 3;
+        }
+        repeated SrcPort srcport = 30;
+        message DstPort {
+            optional uint32 DstPortOp = 1;
+            optional uint32 DstPortValue1 = 2;
+            optional uint32 DstPortValue2 = 3;
+        }
+        repeated DstPort dstport = 31;
+        message TcpFlag {
+            optional uint32 ACK = 1;
+            optional uint32 FIN = 2;
+            optional uint32 PSH = 3;
+            optional uint32 RST = 4;
+            optional uint32 SYN = 5;
+            optional uint32 URG = 6;
+        }
+        repeated TcpFlag tcpflag = 32;
+        message ICMP6 {
+            optional uint32 ICMP6Type = 1;
+            optional uint32 ICMP6Code = 2;
+        }
+        repeated ICMP6 icmp6 = 33;
+    }
+    repeated Rule rule = 1;
+}
+message ACLMACRules {
+    message Rule {
+        optional uint32 GroupID = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional uint32 COS = 4;
+        optional uint32 EncapType = 5;
+        optional uint32 VxlanID = 6;
+        optional string TimeRange = 7;
+        optional bool Counting = 8;
+        optional string Comment = 9;
+        optional uint32 Status = 10;
+        optional uint64 Count = 11;
+        optional uint32 MatchIndex = 12;
+        message SrcMACAddr {
+            optional string SrcMACAddress = 1;
+            optional string SrcMACMask = 2;
+        }
+        repeated SrcMACAddr srcmacaddr = 13;
+        message DstMACAddr {
+            optional string DstMACAddress = 1;
+            optional string DstMACMask = 2;
+        }
+        repeated DstMACAddr dstmacaddr = 14;
+        message Protocol {
+            optional string ProtocolType = 1;
+            optional string ProtocolTypeMask = 2;
+        }
+        repeated Protocol protocol = 15;
+        message LSAP {
+            optional string LSAPType = 1;
+            optional string LSAPTypeMask = 2;
+        }
+        repeated LSAP lsap = 16;
+        message InSrcMACAddr {
+            optional string InSrcMACAddress = 1;
+            optional string InSrcMACMask = 2;
+        }
+        repeated InSrcMACAddr insrcmacaddr = 17;
+        message InDstMACAddr {
+            optional string InDstMACAddress = 1;
+            optional string InDstMACMask = 2;
+        }
+        repeated InDstMACAddr indstmacaddr = 18;
+        message InProtocol {
+            optional string InProtocolType = 1;
+            optional string InProtocolTypeMask = 2;
+        }
+        repeated InProtocol inprotocol = 19;
+    }
+    repeated Rule rule = 1;
+}
+message ACLMACNamedRules {
+    message Rule {
+        optional string GroupIndex = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional uint32 COS = 4;
+        optional uint32 EncapType = 5;
+        optional uint32 VxlanID = 6;
+        optional string TimeRange = 7;
+        optional bool Counting = 8;
+        optional string Comment = 9;
+        optional uint32 Status = 10;
+        optional uint64 Count = 11;
+        optional uint32 MatchIndex = 12;
+        message SrcMACAddr {
+            optional string SrcMACAddress = 1;
+            optional string SrcMACMask = 2;
+        }
+        repeated SrcMACAddr srcmacaddr = 13;
+        message DstMACAddr {
+            optional string DstMACAddress = 1;
+            optional string DstMACMask = 2;
+        }
+        repeated DstMACAddr dstmacaddr = 14;
+        message Protocol {
+            optional string ProtocolType = 1;
+            optional string ProtocolTypeMask = 2;
+        }
+        repeated Protocol protocol = 15;
+        message LSAP {
+            optional string LSAPType = 1;
+            optional string LSAPTypeMask = 2;
+        }
+        repeated LSAP lsap = 16;
+        message InSrcMACAddr {
+            optional string InSrcMACAddress = 1;
+            optional string InSrcMACMask = 2;
+        }
+        repeated InSrcMACAddr insrcmacaddr = 17;
+        message InDstMACAddr {
+            optional string InDstMACAddress = 1;
+            optional string InDstMACMask = 2;
+        }
+        repeated InDstMACAddr indstmacaddr = 18;
+        message InProtocol {
+            optional string InProtocolType = 1;
+            optional string InProtocolTypeMask = 2;
+        }
+        repeated InProtocol inprotocol = 19;
+    }
+    repeated Rule rule = 1;
+}
+message ACLUserRules {
+    message Rule {
+        optional uint32 GroupID = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional uint32 UdfFormat = 4;
+        optional uint32 ProtocolType = 5;
+        optional uint32 IPv6ProtocolType = 6;
+        optional bool SrcAny = 7;
+        optional bool DstAny = 8;
+        optional uint32 DSCP = 9;
+        optional string TimeRange = 10;
+        optional bool Counting = 11;
+        optional string Comment = 12;
+        optional uint32 Status = 13;
+        optional uint64 Count = 14;
+        message L2Rule {
+            optional string L2RuleString = 1;
+            optional string L2RuleMask = 2;
+            optional uint32 L2Offset = 3;
+        }
+        repeated L2Rule l2rule = 15;
+        message IPv4Rule {
+            optional string IPv4RuleString = 1;
+            optional string IPv4RuleMask = 2;
+            optional uint32 IPv4Offset = 3;
+        }
+        repeated IPv4Rule ipv4rule = 16;
+        message IPv6Rule {
+            optional string IPv6RuleString = 1;
+            optional string IPv6RuleMask = 2;
+            optional uint32 IPv6Offset = 3;
+        }
+        repeated IPv6Rule ipv6rule = 17;
+        message L4Rule {
+            optional string L4RuleString = 1;
+            optional string L4RuleMask = 2;
+            optional uint32 L4Offset = 3;
+        }
+        repeated L4Rule l4rule = 18;
+        message L5Rule {
+            optional string L5RuleString = 1;
+            optional string L5RuleMask = 2;
+            optional uint32 L5Offset = 3;
+        }
+        repeated L5Rule l5rule = 19;
+        message SrcIPv4 {
+            optional string SrcIPv4Addr = 1;
+            optional string SrcIPv4Wildcard = 2;
+        }
+        repeated SrcIPv4 srcipv4 = 20;
+        message SrcIPv6 {
+            optional string SrcIPv6Addr = 1;
+            optional uint32 SrcIPv6Prefix = 2;
+        }
+        repeated SrcIPv6 srcipv6 = 21;
+        message DstIPv4 {
+            optional string DstIPv4Addr = 1;
+            optional string DstIPv4Wildcard = 2;
+        }
+        repeated DstIPv4 dstipv4 = 22;
+        message DstIPv6 {
+            optional string DstIPv6Addr = 1;
+            optional uint32 DstIPv6Prefix = 2;
+        }
+        repeated DstIPv6 dstipv6 = 23;
+        message SrcPort {
+            optional uint32 SrcPortOp = 1;
+            optional uint32 SrcPortValue1 = 2;
+            optional uint32 SrcPortValue2 = 3;
+        }
+        repeated SrcPort srcport = 24;
+        message DstPort {
+            optional uint32 DstPortOp = 1;
+            optional uint32 DstPortValue1 = 2;
+            optional uint32 DstPortValue2 = 3;
+        }
+        repeated DstPort dstport = 25;
+    }
+    repeated Rule rule = 1;
+}
+message ACLUserNamedRules {
+    message Rule {
+        optional string GroupIndex = 1;
+        optional uint32 RuleID = 2;
+        optional uint32 Action = 3;
+        optional uint32 UdfFormat = 4;
+        optional uint32 ProtocolType = 5;
+        optional uint32 IPv6ProtocolType = 6;
+        optional bool SrcAny = 7;
+        optional bool DstAny = 8;
+        optional uint32 DSCP = 9;
+        optional string TimeRange = 10;
+        optional bool Counting = 11;
+        optional string Comment = 12;
+        optional uint32 Status = 13;
+        optional uint64 Count = 14;
+        message L2Rule {
+            optional string L2RuleString = 1;
+            optional string L2RuleMask = 2;
+            optional uint32 L2Offset = 3;
+        }
+        repeated L2Rule l2rule = 15;
+        message IPv4Rule {
+            optional string IPv4RuleString = 1;
+            optional string IPv4RuleMask = 2;
+            optional uint32 IPv4Offset = 3;
+        }
+        repeated IPv4Rule ipv4rule = 16;
+        message IPv6Rule {
+            optional string IPv6RuleString = 1;
+            optional string IPv6RuleMask = 2;
+            optional uint32 IPv6Offset = 3;
+        }
+        repeated IPv6Rule ipv6rule = 17;
+        message L4Rule {
+            optional string L4RuleString = 1;
+            optional string L4RuleMask = 2;
+            optional uint32 L4Offset = 3;
+        }
+        repeated L4Rule l4rule = 18;
+        message L5Rule {
+            optional string L5RuleString = 1;
+            optional string L5RuleMask = 2;
+            optional uint32 L5Offset = 3;
+        }
+        repeated L5Rule l5rule = 19;
+        message SrcIPv4 {
+            optional string SrcIPv4Addr = 1;
+            optional string SrcIPv4Wildcard = 2;
+        }
+        repeated SrcIPv4 srcipv4 = 20;
+        message SrcIPv6 {
+            optional string SrcIPv6Addr = 1;
+            optional uint32 SrcIPv6Prefix = 2;
+        }
+        repeated SrcIPv6 srcipv6 = 21;
+        message DstIPv4 {
+            optional string DstIPv4Addr = 1;
+            optional string DstIPv4Wildcard = 2;
+        }
+        repeated DstIPv4 dstipv4 = 22;
+        message DstIPv6 {
+            optional string DstIPv6Addr = 1;
+            optional uint32 DstIPv6Prefix = 2;
+        }
+        repeated DstIPv6 dstipv6 = 23;
+        message SrcPort {
+            optional uint32 SrcPortOp = 1;
+            optional uint32 SrcPortValue1 = 2;
+            optional uint32 SrcPortValue2 = 3;
+        }
+        repeated SrcPort srcport = 24;
+        message DstPort {
+            optional uint32 DstPortOp = 1;
+            optional uint32 DstPortValue1 = 2;
+            optional uint32 DstPortValue2 = 3;
+        }
+        repeated DstPort dstport = 25;
+    }
+    repeated Rule rule = 1;
+}
+message ACLIntervals {
+    message Interval {
+        optional uint32 IntervalType = 1;
+        optional uint32 IntervalValue = 2;
+    }
+    repeated Interval interval = 1;
+}
+message ACLPfilterDefAction {
+    optional uint32 DefaultAction = 1;
+}
+message ACLPfilterIgnoreAction {
+    optional bool IgnoreAction = 1;
+}
+message ACLPfilterApply {
+    message Pfilter {
+        optional uint32 AppObjType = 1;
+        optional uint32 AppObjIndex = 2;
+        optional uint32 AppDirection = 3;
+        optional uint32 AppAclType = 4;
+        optional string AppAclGroup = 5;
+        optional uint32 HardCount = 6;
+        optional uint32 InnerEncap = 7;
+        optional bool ShareMode = 8;
+        optional uint32 AppSequence = 9;
+    }
+    repeated Pfilter pfilter = 1;
+}
+message ACLPfilterGroupRunInfo {
+    message GroupRunInfo {
+        optional uint32 AppObjType = 1;
+        optional uint32 AppObjIndex = 2;
+        optional uint32 AppDirection = 3;
+        optional uint32 AppAclType = 4;
+        optional string AppAclGroup = 5;
+        optional uint32 AclGroupStatus = 6;
+        optional uint32 AclGroupCountStatus = 7;
+        optional uint64 AclGroupPermitPkts = 8;
+        optional uint64 AclGroupPermitBytes = 9;
+        optional uint64 AclGroupDenyPkts = 10;
+        optional uint64 AclGroupDenyBytes = 11;
+    }
+    repeated GroupRunInfo groupruninfo = 1;
+}
+message ACLPfilterRuleRunInfo {
+    message RuleRunInfo {
+        optional uint32 AppObjType = 1;
+        optional uint32 AppObjIndex = 2;
+        optional uint32 AppDirection = 3;
+        optional uint32 AppAclType = 4;
+        optional string AppAclGroup = 5;
+        optional uint32 AppAclRuleIndex = 6;
+        optional uint32 AclRuleStatus = 7;
+        optional uint32 AclRuleCountStatus = 8;
+        optional uint64 AclRuleMatchPkts = 9;
+        optional uint64 AclRuleMatchBytes = 10;
+    }
+    repeated RuleRunInfo ruleruninfo = 1;
+}
+message ACLPfilterStatisticSum {
+    message StatisticSum {
+        optional uint32 Direction = 1;
+        optional uint32 AclType = 2;
+        optional string AclGroup = 3;
+        optional uint32 AclRuleIndex = 4;
+        optional uint64 MatchPackets = 5;
+        optional uint64 MatchBytes = 6;
+    }
+    repeated StatisticSum statisticsum = 1;
+}
+message ACLZonePairPfilter {
+    message Pfilter {
+        optional string SrcZone = 1;
+        optional string DestZone = 2;
+        optional uint32 AclType = 3;
+        optional string AclGroup = 4;
+        optional uint32 AppSequence = 5;
+    }
+    repeated Pfilter pfilter = 1;
+}
+message ACLZonePairPfilterRules {
+    message Rule {
+        optional string SrcZone = 1;
+        optional string DestZone = 2;
+        optional uint32 AclType = 3;
+        optional string AclGroup = 4;
+        optional uint32 AclRuleID = 5;
+        optional uint64 RuleMatchPkts = 6;
+        optional uint64 RuleMatchBytes = 7;
+    }
+    repeated Rule rule = 1;
+}
+service ACLService {
+    rpc GetJsonACLBase(ACLBase) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLCapability(ACLCapability) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLGroups(ACLGroups) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLNamedGroups(ACLNamedGroups) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIPv4BasicRules(ACLIPv4BasicRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIPv4BasicRulesStream(ACLIPv4BasicRules) returns (stream grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIPv4NamedBasicRules(ACLIPv4NamedBasicRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIPv6BasicRules(ACLIPv6BasicRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIPv6NamedBasicRules(ACLIPv6NamedBasicRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIPv4AdvanceRules(ACLIPv4AdvanceRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIPv4NamedAdvanceRules(ACLIPv4NamedAdvanceRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIPv6AdvanceRules(ACLIPv6AdvanceRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIPv6NamedAdvanceRules(ACLIPv6NamedAdvanceRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLMACRules(ACLMACRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLMACNamedRules(ACLMACNamedRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLUserRules(ACLUserRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLUserNamedRules(ACLUserNamedRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLIntervals(ACLIntervals) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLPfilterDefAction(ACLPfilterDefAction) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLPfilterIgnoreAction(ACLPfilterIgnoreAction) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLPfilterApply(ACLPfilterApply) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLPfilterGroupRunInfo(ACLPfilterGroupRunInfo) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLPfilterRuleRunInfo(ACLPfilterRuleRunInfo) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLPfilterStatisticSum(ACLPfilterStatisticSum) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLZonePairPfilter(ACLZonePairPfilter) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonACLZonePairPfilterRules(ACLZonePairPfilterRules) returns (grpc_service.GetJsonReply) {}
+}

@@ -1,0 +1,118 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  chip_namespace;
+
+message chip_buffers_buffer_config {
+	optional string name = 1;
+}
+message chip_buffers_buffer_input_queues_queue_state {
+	optional string name = 1;
+	optional uint64 current_usage = 2;
+	optional uint64 available_usage = 3;
+	optional uint32 current_utilization = 4;
+	optional uint64 historical_peak = 5;
+	optional uint64 alarm_threshold = 6;
+	optional uint32 alarm_count = 7;
+	optional uint64 discard_pkt = 8;
+}
+message chip_buffers_buffer_input_queues_queue {
+	optional string name = 1;
+	optional chip_buffers_buffer_input_queues_queue_state state = 2;
+}
+message chip_buffers_buffer_input_queues {
+	repeated chip_buffers_buffer_input_queues_queue queue = 1;
+}
+message chip_buffers_buffer_input {
+	optional chip_buffers_buffer_input_queues queues = 1;
+}
+message chip_buffers_buffer_output_queues_queue_state {
+	optional string name = 1;
+	optional uint64 current_usage = 2;
+	optional uint64 available_usage = 3;
+	optional uint32 current_utilization = 4;
+	optional uint64 historical_peak = 5;
+	optional uint64 alarm_threshold = 6;
+	optional uint32 alarm_count = 7;
+	optional uint64 discard_pkt = 8;
+}
+message chip_buffers_buffer_output_queues_queue {
+	optional string name = 1;
+	optional chip_buffers_buffer_output_queues_queue_state state = 2;
+}
+message chip_buffers_buffer_output_queues {
+
+	repeated chip_buffers_buffer_output_queues_queue queue = 1;
+}
+message chip_buffers_buffer_output {
+	optional chip_buffers_buffer_output_queues queues = 1;
+}
+message chip_buffers_buffer_interfaces_interface_input_queues_queue_state {
+	optional string parent_name = 1;
+	optional string name = 2;
+	optional uint64 current_usage = 3;
+	optional uint64 available_usage = 4;
+	optional uint32 current_utilization = 5;
+	optional uint64 historical_peak = 6;
+	optional uint64 discard_pkt = 7;
+}
+message chip_buffers_buffer_interfaces_interface_input_queues_queue {
+	optional string parent_name = 1;
+	optional string name = 2;
+	optional chip_buffers_buffer_interfaces_interface_input_queues_queue_state state = 3;
+}
+message chip_buffers_buffer_interfaces_interface_input_queues {
+	
+	repeated chip_buffers_buffer_interfaces_interface_input_queues_queue queue = 1;
+}
+message chip_buffers_buffer_interfaces_interface_input {
+
+	optional chip_buffers_buffer_interfaces_interface_input_queues queues = 1;
+}
+message chip_buffers_buffer_interfaces_interface_output_queues_queue_state {
+	optional string parent_name = 1;
+	optional string name = 2;
+	optional uint64 current_usage = 3;
+	optional uint64 available_usage = 4;
+	optional uint32 current_utilization = 5;
+	optional uint64 historical_peak = 6;
+	optional uint64 discard_pkt = 7;
+}
+message chip_buffers_buffer_interfaces_interface_output_queues_queue {
+	optional string parent_name = 1;
+	optional string name = 2;
+
+	optional chip_buffers_buffer_interfaces_interface_output_queues_queue_state state = 3;
+}
+message chip_buffers_buffer_interfaces_interface_output_queues {
+
+	repeated chip_buffers_buffer_interfaces_interface_output_queues_queue queue = 1;
+}
+message chip_buffers_buffer_interfaces_interface_output {
+
+	optional chip_buffers_buffer_interfaces_interface_output_queues queues = 1;
+}
+message chip_buffers_buffer_interfaces_interface {
+	optional string interface_id = 1;
+	optional chip_buffers_buffer_interfaces_interface_input input = 2;
+	optional chip_buffers_buffer_interfaces_interface_output output = 3;
+}
+message chip_buffers_buffer_interfaces {
+	repeated chip_buffers_buffer_interfaces_interface interface = 1;
+}
+message chip_buffers_buffer {
+	optional string name = 1;
+	optional chip_buffers_buffer_config config = 2;
+	optional chip_buffers_buffer_input input = 3;
+	optional chip_buffers_buffer_output output = 4;
+	optional chip_buffers_buffer_interfaces interfaces = 5;
+}
+message chip_buffers {
+    repeated chip_buffers_buffer buffer = 1;
+}
+message chip {
+    optional string targetname = 1;
+    optional chip_buffers buffers = 2;
+}
+service chipService {
+    rpc GetJsonchip(chip) returns (grpc_service.GetJsonReply) {}
+}

@@ -1,0 +1,938 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  mqc;
+message MQCGlobalRunInfo {
+    optional uint32 ProcessingStatus = 1;
+}
+message MQCClassifiers {
+    message Classifier {
+        optional string Name = 1;
+        optional uint32 Operator = 2;
+        optional string Description = 3;
+        optional uint32 RuleNum = 4;
+        optional uint32 DefineMode = 5;
+        optional uint32 NextRuleID = 6;
+    }
+    repeated Classifier classifier = 1;
+}
+message MQCBehaviors {
+    message Behavior {
+        optional string Name = 1;
+        optional uint32 ActionMask = 2;
+        optional uint32 DefineMode = 3;
+    }
+    repeated Behavior behavior = 1;
+}
+message MQCPolicies {
+    message Policy {
+        optional string Name = 1;
+        optional uint32 CBMapNum = 2;
+        optional uint32 DefineMode = 3;
+        optional uint32 NextCBMapID = 4;
+        optional uint32 Type = 5;
+    }
+    repeated Policy policy = 1;
+}
+message MQCCBMaps {
+    message CBMap {
+        optional string PolicyName = 1;
+        optional string ClassifierName = 2;
+        optional string BehaviorName = 3;
+        optional uint32 Mode = 4;
+        optional uint32 DefineMode = 5;
+    }
+    repeated CBMap cbmap = 1;
+}
+message MQCRules {
+    message Rule {
+        optional string ClassName = 1;
+        optional uint32 RuleID = 2;
+        optional bool Not = 3;
+        optional uint32 PktType = 4;
+        optional string IPv4Acl = 5;
+        optional string IPv6Acl = 6;
+        optional string SrcMac = 7;
+        optional string DestMac = 8;
+        optional string ServiceVLANID = 9;
+        optional string CustomerVLANID = 10;
+        optional uint32 QoSLocalID = 11;
+        optional string Application = 12;
+        optional string ApplicationGroup = 13;
+        optional uint32 Vxlan = 14;
+        optional bool VxlanAny = 15;
+        optional uint32 TunnelID = 16;
+        optional uint32 VLANTag = 17;
+        optional uint32 Mpls = 18;
+        optional uint32 IFA = 19;
+        optional uint32 OutBoundInterface = 20;
+        optional string Nvgre = 21;
+        optional bool NvgreAny = 22;
+        message Acl {
+            optional string IPv4Acl = 1;
+            optional string IPv6Acl = 2;
+            optional string MACAcl = 3;
+            optional string UserAcl = 4;
+            optional bool Inner = 5;
+        }
+        repeated Acl acl = 23;
+        message ServiceDot1pList {
+            optional uint32 ServiceDot1p = 1;
+        }
+        repeated ServiceDot1pList servicedot1plist = 24;
+        message CustomerDot1pList {
+            optional uint32 CustomerDot1p = 1;
+        }
+        repeated CustomerDot1pList customerdot1plist = 25;
+        message ExpList {
+            optional uint32 Exp = 1;
+        }
+        repeated ExpList explist = 26;
+        message InnerExpList {
+            optional uint32 InnerExp = 1;
+        }
+        repeated InnerExpList innerexplist = 27;
+        message IPPrecedenceList {
+            optional uint32 IPPrecedence = 1;
+        }
+        repeated IPPrecedenceList ipprecedencelist = 28;
+        message LocalPrecedenceList {
+            optional uint32 LocalPrecedence = 1;
+        }
+        repeated LocalPrecedenceList localprecedencelist = 29;
+        message DscpList {
+            optional uint32 Dscp = 1;
+        }
+        repeated DscpList dscplist = 30;
+        message DropPriorityList {
+            optional uint32 DropPriority = 1;
+        }
+        repeated DropPriorityList dropprioritylist = 31;
+        message MplsLabelList {
+            optional uint32 MplsLabel = 1;
+        }
+        repeated MplsLabelList mplslabellist = 32;
+        message InnerMplsLabelList {
+            optional uint32 InnerMplsLabel = 1;
+        }
+        repeated InnerMplsLabelList innermplslabellist = 33;
+        message PktLength {
+            optional uint32 Min = 1;
+            optional uint32 Max = 2;
+        }
+        repeated PktLength pktlength = 34;
+        message MplsLabelRange {
+            optional uint32 LabelStart = 1;
+            optional uint32 LabelEnd = 2;
+        }
+        repeated MplsLabelRange mplslabelrange = 35;
+        message InnerMplsLabelRange {
+            optional uint32 InnerLabelStart = 1;
+            optional uint32 InnerLabelEnd = 2;
+        }
+        repeated InnerMplsLabelRange innermplslabelrange = 36;
+        message RTPPort {
+            optional uint32 PortStart = 1;
+            optional uint32 PortEnd = 2;
+        }
+        repeated RTPPort rtpport = 37;
+    }
+    repeated Rule rule = 1;
+}
+message MQCRemark {
+    message Action {
+        optional string BehaviorName = 1;
+        optional uint32 Type = 2;
+        optional uint32 Color = 3;
+        optional uint32 Value = 4;
+        optional string SrcMACAddr = 5;
+        optional string DstMACAddr = 6;
+        optional string SrcIPv4Addr = 7;
+        optional string DstIPv4Addr = 8;
+        optional string SrcIPv6Addr = 9;
+        optional string DstIPv6Addr = 10;
+    }
+    repeated Action action = 1;
+}
+message MQCRedirect {
+    message Action {
+        optional string BehaviorName = 1;
+        optional uint32 Type = 2;
+        optional uint32 IfIndex = 3;
+        optional bool TrackOap = 4;
+        optional uint32 VLANID = 5;
+        optional string VSI = 6;
+        optional uint32 MonitorGroupID = 7;
+    }
+    repeated Action action = 1;
+}
+message MQCFilter {
+    message Action {
+        optional string BehaviorName = 1;
+        optional uint32 Type = 2;
+    }
+    repeated Action action = 1;
+}
+message MQCVlanPolicy {
+    message Application {
+        optional uint32 VLANID = 1;
+        optional uint32 Direction = 2;
+        optional string PolicyName = 3;
+        optional uint32 Status = 4;
+    }
+    repeated Application application = 1;
+}
+message MQCACPolicy {
+    message Application {
+        optional uint32 IfIndex = 1;
+        optional uint32 SrvID = 2;
+        optional uint32 Direction = 3;
+        optional string PolicyName = 4;
+        optional uint32 Status = 5;
+    }
+    repeated Application application = 1;
+}
+message MQCAssuredForwarding {
+    message Action {
+        optional string BehaviorName = 1;
+        optional uint32 Kbps = 2;
+        optional uint32 Pct = 3;
+        optional uint32 RemainingPct = 4;
+    }
+    repeated Action action = 1;
+}
+message MQCExpeditedForwarding {
+    message Action {
+        optional string BehaviorName = 1;
+        message Bandwidth {
+            optional uint32 Kbps = 1;
+            optional uint32 CBS = 2;
+        }
+        repeated Bandwidth bandwidth = 2;
+        message BandwidthPct {
+            optional uint32 Pct = 1;
+            optional uint32 CBSRatio = 2;
+        }
+        repeated BandwidthPct bandwidthpct = 3;
+    }
+    repeated Action action = 1;
+}
+message MQCWFQ {
+    message Action {
+        optional string BehaviorName = 1;
+        optional uint32 QueueNum = 2;
+    }
+    repeated Action action = 1;
+}
+message MQCCAR {
+    message Action {
+        optional string BehaviorName = 1;
+        optional uint32 BandwidthUnit = 2;
+        optional uint32 CIR = 3;
+        optional uint32 CBS = 4;
+        optional uint32 EBS = 5;
+        optional uint32 PIR = 6;
+        optional string AggregativeName = 7;
+        optional string HierarchicalName = 8;
+        optional uint32 Mode = 9;
+        message GreenAction {
+            optional uint32 GreenActionType = 1;
+            optional uint32 GreenActionValue = 2;
+        }
+        repeated GreenAction greenaction = 10;
+        message YellowAction {
+            optional uint32 YellowActionType = 1;
+            optional uint32 YellowActionValue = 2;
+        }
+        repeated YellowAction yellowaction = 11;
+        message RedAction {
+            optional uint32 RedActionType = 1;
+            optional uint32 RedActionValue = 2;
+        }
+        repeated RedAction redaction = 12;
+    }
+    repeated Action action = 1;
+}
+message MQCGTS {
+    message Action {
+        optional string BehaviorName = 1;
+        optional uint32 BandwidthUnit = 2;
+        optional uint32 CIR = 3;
+        optional uint32 CBS = 4;
+        optional uint32 EBS = 5;
+        optional uint32 PIR = 6;
+        optional uint32 QueueLength = 7;
+    }
+    repeated Action action = 1;
+}
+message MQCReservedBandwidth {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 Pct = 2;
+    }
+    repeated Interface interface = 1;
+}
+message MQCACPolicyCar {
+    message AC {
+        optional uint32 IfIndex = 1;
+        optional uint32 SrvID = 2;
+        optional uint32 Direction = 3;
+        optional string ClassName = 4;
+        optional uint32 CIR = 5;
+        optional uint32 CBS = 6;
+        optional uint32 EBS = 7;
+        optional uint32 PIR = 8;
+        optional uint64 GreenPkts = 9;
+        optional uint64 GreenBytes = 10;
+        optional uint64 YellowPkts = 11;
+        optional uint64 YellowBytes = 12;
+        optional uint64 RedPkts = 13;
+        optional uint64 RedBytes = 14;
+        message GreenAction {
+            optional uint32 GreenActionType = 1;
+            optional uint32 GreenActionValue = 2;
+        }
+        repeated GreenAction greenaction = 15;
+        message YellowAction {
+            optional uint32 YellowActionType = 1;
+            optional uint32 YellowActionValue = 2;
+        }
+        repeated YellowAction yellowaction = 16;
+        message RedAction {
+            optional uint32 RedActionType = 1;
+            optional uint32 RedActionValue = 2;
+        }
+        repeated RedAction redaction = 17;
+    }
+    repeated AC ac = 1;
+}
+message MQCVLANPolicyCBMap {
+    message VLAN {
+        optional uint32 VLANID = 1;
+        optional uint32 Direction = 2;
+        optional string ClassName = 3;
+        optional string BehaviorName = 4;
+        optional uint32 Mode = 5;
+        optional uint32 Status = 6;
+        optional uint64 MatchedPackets = 7;
+        optional uint64 MatchedBytes = 8;
+    }
+    repeated VLAN vlan = 1;
+}
+message MQCMirror {
+    message Action {
+        optional string BehaviorName = 1;
+        optional uint32 Type = 2;
+        optional uint32 IfIndex = 3;
+        optional uint32 VLANID = 4;
+        optional string Mac = 5;
+        optional string SamplerName = 6;
+        optional bool Truncation = 7;
+        optional uint32 EncapType = 8;
+        message IP {
+            optional string DestIP = 1;
+            optional string SrcIP = 2;
+            optional uint32 DSCP = 3;
+            optional uint32 VLAN = 4;
+            optional string VRF = 5;
+        }
+        repeated IP ip = 9;
+    }
+    repeated Action action = 1;
+}
+message MQCMirrorDynamicIF {
+    message Action {
+        optional string BehaviorName = 1;
+        optional string DestIP = 2;
+        optional string SrcIP = 3;
+        optional uint32 DSCP = 4;
+        optional uint32 VLAN = 5;
+        optional string VRF = 6;
+        optional string Mac = 7;
+        optional string SamplerName = 8;
+        optional bool Truncation = 9;
+        optional uint32 DynamicIfIndex = 10;
+    }
+    repeated Action action = 1;
+}
+message MQCIfPolicyEnhance {
+    message Application {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional string PolicyName = 3;
+        optional uint32 Status = 4;
+    }
+    repeated Application application = 1;
+}
+message MQCGlobalPolicyEnhanceCBMap {
+    message Global {
+        optional uint32 Direction = 1;
+        optional string ClassName = 2;
+        optional string BehaviorName = 3;
+        optional uint32 Mode = 4;
+        optional uint32 Status = 5;
+    }
+    repeated Global global = 1;
+}
+message MQCGlobalPolicyEnhance {
+    message Application {
+        optional uint32 Direction = 1;
+        optional string PolicyName = 2;
+        optional uint32 Status = 3;
+    }
+    repeated Application application = 1;
+}
+message MQCIfPolicyEnhanceCBMap {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional string ClassName = 3;
+        optional string BehaviorName = 4;
+        optional uint32 Mode = 5;
+        optional uint32 Status = 6;
+    }
+    repeated Interface interface = 1;
+}
+message MQCAccount {
+    message Action {
+        optional string BehaviorName = 1;
+        optional bool Byte = 2;
+        optional bool Packet = 3;
+    }
+    repeated Action action = 1;
+}
+message MQCVLANPolicyCar {
+    message VLAN {
+        optional uint32 VLANID = 1;
+        optional uint32 Direction = 2;
+        optional string ClassName = 3;
+        optional uint32 CIR = 4;
+        optional uint32 CBS = 5;
+        optional uint32 EBS = 6;
+        optional uint32 PIR = 7;
+        optional uint64 GreenPkts = 8;
+        optional uint64 GreenBytes = 9;
+        optional uint64 YellowPkts = 10;
+        optional uint64 YellowBytes = 11;
+        optional uint64 RedPkts = 12;
+        optional uint64 RedBytes = 13;
+        message GreenAction {
+            optional uint32 GreenActionType = 1;
+            optional uint32 GreenActionValue = 2;
+        }
+        repeated GreenAction greenaction = 14;
+        message YellowAction {
+            optional uint32 YellowActionType = 1;
+            optional uint32 YellowActionValue = 2;
+        }
+        repeated YellowAction yellowaction = 15;
+        message RedAction {
+            optional uint32 RedActionType = 1;
+            optional uint32 RedActionValue = 2;
+        }
+        repeated RedAction redaction = 16;
+    }
+    repeated VLAN vlan = 1;
+}
+message MQCVLANPolicyAccount {
+    message VLAN {
+        optional uint32 VLANID = 1;
+        optional uint32 Direction = 2;
+        optional string ClassName = 3;
+        optional uint64 Packets = 4;
+        optional uint64 Bytes = 5;
+        optional uint64 pps = 6;
+        optional uint64 bps = 7;
+    }
+    repeated VLAN vlan = 1;
+}
+message MQCMAC {
+    message Action {
+        optional string BehaviorName = 1;
+        optional bool Learning = 2;
+    }
+    repeated Action action = 1;
+}
+message MQCTelemetry {
+    optional string DeviceID = 1;
+    message Collector {
+        optional string SrcIP = 1;
+        optional string DstIP = 2;
+        optional uint32 SrcPort = 3;
+        optional uint32 DstPort = 4;
+        optional uint32 VLANID = 5;
+    }
+    repeated Collector collector = 2;
+}
+message MQCTelemetryRoles {
+    message TelemetryRole {
+        optional uint32 IfIndex = 1;
+        optional uint32 Role = 2;
+    }
+    repeated TelemetryRole telemetryrole = 1;
+}
+message MQCTelemetryLoopbacks {
+    message TelemetryLoopback {
+        optional uint32 IfIndex = 1;
+        optional bool Loopback = 2;
+    }
+    repeated TelemetryLoopback telemetryloopback = 1;
+}
+message MQCTelemetryGlobalEnable {
+    optional bool Enable = 1;
+}
+message MQCTelemetryActions {
+    message TelemetryAction {
+        optional uint32 IfIndex = 1;
+        optional uint32 IFAId = 2;
+        optional uint32 Status = 3;
+        message Match {
+            optional uint32 AclType = 1;
+            optional string Acl = 2;
+            optional bool Loopback = 3;
+        }
+        repeated Match match = 4;
+        message Action {
+            optional bool Md = 1;
+            optional bool Mirror = 2;
+            optional string SamplerName = 3;
+            optional bool Drop = 4;
+        }
+        repeated Action action = 5;
+    }
+    repeated TelemetryAction telemetryaction = 1;
+}
+message MQCSysTruncation {
+    optional uint32 TruncationLen = 1;
+}
+message MQCSysTruncationCapa {
+    optional uint32 Min = 1;
+    optional uint32 Max = 2;
+}
+message MQCMonitorGroup {
+    message Group {
+        optional uint32 GroupID = 1;
+    }
+    repeated Group group = 1;
+}
+message MQCMonitorGroupCapa {
+    optional uint32 MaxGroupID = 1;
+}
+message MQCMonitorPort {
+    message MonitorPort {
+        optional uint32 GroupID = 1;
+        optional uint32 IfIndex = 2;
+    }
+    repeated MonitorPort monitorport = 1;
+}
+message MQCStrip {
+    message Strip {
+        optional string BehaviorName = 1;
+        optional uint32 Type = 2;
+        optional uint32 OffSetValue = 3;
+        optional uint32 HeadLength = 4;
+        optional string DstMACAddr = 5;
+        optional string SrcMACAddr = 6;
+        optional uint32 VlanID = 7;
+        optional uint32 Dot1p = 8;
+        optional string EthTypeID = 9;
+    }
+    repeated Strip strip = 1;
+}
+message MQCStripCapa {
+    optional uint32 Min = 1;
+    optional uint32 Max = 2;
+}
+message MQCNest {
+    message Nest {
+        optional string BehaviorName = 1;
+        optional uint32 VlanID = 2;
+        optional uint32 Dot1p = 3;
+    }
+    repeated Nest nest = 1;
+}
+message MQCBehaviorTruncation {
+    message Truncation {
+        optional string BehaviorName = 1;
+        optional bool Truncation = 2;
+    }
+    repeated Truncation truncation = 1;
+}
+message MQCTimeStamp {
+    message TimeStamp {
+        optional string BehaviorName = 1;
+        optional string DstMACAddr = 2;
+        optional string SrcMACAddr = 3;
+        optional string EthType = 4;
+    }
+    repeated TimeStamp timestamp = 1;
+}
+message MQCAccountInterfacePolicy {
+    message Application {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional string PolicyName = 3;
+        optional uint32 Status = 4;
+        optional uint32 Mode = 5;
+    }
+    repeated Application application = 1;
+}
+message MQCRemarkInterfacePolicy {
+    message Application {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional string PolicyName = 3;
+        optional uint32 Status = 4;
+        optional uint32 Mode = 5;
+    }
+    repeated Application application = 1;
+}
+message MQCTapInterfacePolicy {
+    message Application {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional string PolicyName = 3;
+        optional uint32 Status = 4;
+        optional uint32 Mode = 5;
+    }
+    repeated Application application = 1;
+}
+message MQCIfTapPolicyCBMap {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional string ClassName = 3;
+        optional string BehaviorName = 4;
+        optional uint32 Mode = 5;
+        optional uint32 Status = 6;
+        optional uint64 MatchedPackets = 7;
+        optional uint64 MatchedBytes = 8;
+    }
+    repeated Interface interface = 1;
+}
+message MQCGlobalCategoryPolicy {
+    message Application {
+        optional uint32 Direction = 1;
+        optional uint32 PolicyType = 2;
+        optional string PolicyName = 3;
+        optional uint32 PreOrder = 4;
+        optional uint32 Status = 5;
+    }
+    repeated Application application = 1;
+}
+message MQCInterfaceCategoryPolicy {
+    message Application {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional uint32 PolicyType = 3;
+        optional string PolicyName = 4;
+        optional uint32 PreOrder = 5;
+        optional uint32 Status = 6;
+    }
+    repeated Application application = 1;
+}
+message MQCIfCategoryPolicyCBMap {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional uint32 PolicyType = 3;
+        optional string PolicyName = 4;
+        optional string ClassName = 5;
+        optional string BehaviorName = 6;
+        optional uint32 Mode = 7;
+        optional uint32 Status = 8;
+        optional uint64 MatchedPackets = 9;
+        optional uint64 MatchedBytes = 10;
+    }
+    repeated Interface interface = 1;
+}
+message MQCIfCategoryPolicyCar {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional uint32 PolicyType = 3;
+        optional string PolicyName = 4;
+        optional string ClassName = 5;
+        optional uint32 CIR = 6;
+        optional uint32 CBS = 7;
+        optional uint32 EBS = 8;
+        optional uint32 PIR = 9;
+        optional uint64 GreenPkts = 10;
+        optional uint64 GreenBytes = 11;
+        optional uint64 YellowPkts = 12;
+        optional uint64 YellowBytes = 13;
+        optional uint64 RedPkts = 14;
+        optional uint64 RedBytes = 15;
+        message GreenAction {
+            optional uint32 GreenActionType = 1;
+            optional uint32 GreenActionValue = 2;
+        }
+        repeated GreenAction greenaction = 16;
+        message YellowAction {
+            optional uint32 YellowActionType = 1;
+            optional uint32 YellowActionValue = 2;
+        }
+        repeated YellowAction yellowaction = 17;
+        message RedAction {
+            optional uint32 RedActionType = 1;
+            optional uint32 RedActionValue = 2;
+        }
+        repeated RedAction redaction = 18;
+    }
+    repeated Interface interface = 1;
+}
+message MQCGlobalCategoryPolicyCBMap {
+    message Global {
+        optional uint32 Direction = 1;
+        optional uint32 PolicyType = 2;
+        optional string PolicyName = 3;
+        optional string ClassName = 4;
+        optional string BehaviorName = 5;
+        optional uint32 Mode = 6;
+        optional uint32 Status = 7;
+        optional uint64 MatchedPackets = 8;
+        optional uint64 MatchedBytes = 9;
+    }
+    repeated Global global = 1;
+}
+message MQCGlobalCategoryPolicyCar {
+    message Global {
+        optional uint32 Direction = 1;
+        optional uint32 PolicyType = 2;
+        optional string PolicyName = 3;
+        optional string ClassName = 4;
+        optional uint32 CIR = 5;
+        optional uint32 CBS = 6;
+        optional uint32 EBS = 7;
+        optional uint32 PIR = 8;
+        optional uint64 GreenPkts = 9;
+        optional uint64 GreenBytes = 10;
+        optional uint64 YellowPkts = 11;
+        optional uint64 YellowBytes = 12;
+        optional uint64 RedPkts = 13;
+        optional uint64 RedBytes = 14;
+        message GreenAction {
+            optional uint32 GreenActionType = 1;
+            optional uint32 GreenActionValue = 2;
+        }
+        repeated GreenAction greenaction = 15;
+        message YellowAction {
+            optional uint32 YellowActionType = 1;
+            optional uint32 YellowActionValue = 2;
+        }
+        repeated YellowAction yellowaction = 16;
+        message RedAction {
+            optional uint32 RedActionType = 1;
+            optional uint32 RedActionValue = 2;
+        }
+        repeated RedAction redaction = 17;
+    }
+    repeated Global global = 1;
+}
+message MQCIfCategoryPolicyAccount {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional uint32 PolicyType = 3;
+        optional string PolicyName = 4;
+        optional string ClassName = 5;
+        optional uint64 Packets = 6;
+        optional uint64 Bytes = 7;
+        optional uint64 pps = 8;
+        optional uint64 bps = 9;
+    }
+    repeated Interface interface = 1;
+}
+message MQCGlobalCategoryPolicyAccount {
+    message Global {
+        optional uint32 Direction = 1;
+        optional uint32 PolicyType = 2;
+        optional string PolicyName = 3;
+        optional string ClassName = 4;
+        optional uint64 Packets = 5;
+        optional uint64 Bytes = 6;
+        optional uint64 pps = 7;
+        optional uint64 bps = 8;
+    }
+    repeated Global global = 1;
+}
+message MQCIfCategoryPolicyAF {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 PolicyType = 2;
+        optional string PolicyName = 3;
+        optional string ClassName = 4;
+        optional uint32 Kbps = 5;
+        optional uint32 Bps = 6;
+        optional uint32 RemainingPct = 7;
+        optional uint64 MatchedPackets = 8;
+        optional uint64 MatchedBytes = 9;
+        optional uint64 EnqueuedPackets = 10;
+        optional uint64 EnqueuedBytes = 11;
+        optional uint64 DiscardedPackets = 12;
+        optional uint64 DiscardedBytes = 13;
+    }
+    repeated Interface interface = 1;
+}
+message MQCIfCategoryPolicyEF {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 PolicyType = 2;
+        optional string PolicyName = 3;
+        optional string ClassName = 4;
+        optional uint32 Kbps = 5;
+        optional uint32 CBS = 6;
+        optional uint64 MatchedPackets = 7;
+        optional uint64 MatchedBytes = 8;
+        optional uint64 EnqueuedPackets = 9;
+        optional uint64 EnqueuedBytes = 10;
+        optional uint64 DiscardedPackets = 11;
+        optional uint64 DiscardedBytes = 12;
+    }
+    repeated Interface interface = 1;
+}
+message MQCIfCategoryPolicyWFQ {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 PolicyType = 2;
+        optional string PolicyName = 3;
+        optional string ClassName = 4;
+        optional uint32 QueueNum = 5;
+        optional uint64 MatchedPackets = 6;
+        optional uint64 MatchedBytes = 7;
+        optional uint64 EnqueuedPackets = 8;
+        optional uint64 EnqueuedBytes = 9;
+        optional uint64 DiscardedPackets = 10;
+        optional uint64 DiscardedBytes = 11;
+    }
+    repeated Interface interface = 1;
+}
+message MQCIfCategoryPolicyGts {
+    message Interface {
+        optional uint32 IfIndex = 1;
+        optional uint32 Direction = 2;
+        optional uint32 PolicyType = 3;
+        optional string PolicyName = 4;
+        optional string ClassName = 5;
+        optional uint32 CIR = 6;
+        optional uint32 CBS = 7;
+        optional uint32 EBS = 8;
+        optional uint32 PIR = 9;
+        optional uint32 QueueLength = 10;
+        optional uint64 PassedPkts = 11;
+        optional uint64 PassedBytes = 12;
+        optional uint64 DiscardedPkts = 13;
+        optional uint64 DiscardedBytes = 14;
+        optional uint64 DelayedPkts = 15;
+        optional uint64 DelayedBytes = 16;
+        optional uint32 QueueSize = 17;
+    }
+    repeated Interface interface = 1;
+}
+message MQCGlobalCategoryPolicyGts {
+    message Global {
+        optional uint32 Direction = 1;
+        optional uint32 PolicyType = 2;
+        optional string PolicyName = 3;
+        optional string ClassName = 4;
+        optional uint32 CIR = 5;
+        optional uint32 CBS = 6;
+        optional uint32 EBS = 7;
+        optional uint32 PIR = 8;
+        optional uint32 QueueLength = 9;
+        optional uint64 PassedPkts = 10;
+        optional uint64 PassedBytes = 11;
+        optional uint64 DiscardedPkts = 12;
+        optional uint64 DiscardedBytes = 13;
+        optional uint64 DelayedPkts = 14;
+        optional uint64 DelayedBytes = 15;
+        optional uint32 QueueSize = 16;
+    }
+    repeated Global global = 1;
+}
+message MQCVSIPolicy {
+    message Application {
+        optional string VSI = 1;
+        optional uint32 Direction = 2;
+        optional string PolicyName = 3;
+        optional uint32 Status = 4;
+    }
+    repeated Application application = 1;
+}
+message MQCVSIPolicyCBMap {
+    message VSI {
+        optional string VSI = 1;
+        optional uint32 Direction = 2;
+        optional string ClassName = 3;
+        optional string BehaviorName = 4;
+        optional uint32 Mode = 5;
+        optional uint32 Status = 6;
+        optional uint64 MatchedPackets = 7;
+        optional uint64 MatchedBytes = 8;
+    }
+    repeated VSI vsi = 1;
+}
+service MQCService {
+    rpc GetJsonMQCGlobalRunInfo(MQCGlobalRunInfo) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCClassifiers(MQCClassifiers) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCBehaviors(MQCBehaviors) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCPolicies(MQCPolicies) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCCBMaps(MQCCBMaps) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCRules(MQCRules) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCRemark(MQCRemark) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCRedirect(MQCRedirect) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCFilter(MQCFilter) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCVlanPolicy(MQCVlanPolicy) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCACPolicy(MQCACPolicy) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCAssuredForwarding(MQCAssuredForwarding) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCExpeditedForwarding(MQCExpeditedForwarding) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCWFQ(MQCWFQ) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCCAR(MQCCAR) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCGTS(MQCGTS) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCReservedBandwidth(MQCReservedBandwidth) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCACPolicyCar(MQCACPolicyCar) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCVLANPolicyCBMap(MQCVLANPolicyCBMap) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCMirror(MQCMirror) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCMirrorDynamicIF(MQCMirrorDynamicIF) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfPolicyEnhance(MQCIfPolicyEnhance) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCGlobalPolicyEnhanceCBMap(MQCGlobalPolicyEnhanceCBMap) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCGlobalPolicyEnhance(MQCGlobalPolicyEnhance) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfPolicyEnhanceCBMap(MQCIfPolicyEnhanceCBMap) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCAccount(MQCAccount) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCVLANPolicyCar(MQCVLANPolicyCar) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCVLANPolicyAccount(MQCVLANPolicyAccount) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCMAC(MQCMAC) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCTelemetry(MQCTelemetry) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCTelemetryRoles(MQCTelemetryRoles) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCTelemetryLoopbacks(MQCTelemetryLoopbacks) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCTelemetryGlobalEnable(MQCTelemetryGlobalEnable) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCTelemetryActions(MQCTelemetryActions) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCSysTruncation(MQCSysTruncation) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCSysTruncationCapa(MQCSysTruncationCapa) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCMonitorGroup(MQCMonitorGroup) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCMonitorGroupCapa(MQCMonitorGroupCapa) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCMonitorPort(MQCMonitorPort) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCStrip(MQCStrip) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCStripCapa(MQCStripCapa) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCNest(MQCNest) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCBehaviorTruncation(MQCBehaviorTruncation) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCTimeStamp(MQCTimeStamp) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCAccountInterfacePolicy(MQCAccountInterfacePolicy) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCRemarkInterfacePolicy(MQCRemarkInterfacePolicy) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCTapInterfacePolicy(MQCTapInterfacePolicy) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfTapPolicyCBMap(MQCIfTapPolicyCBMap) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCGlobalCategoryPolicy(MQCGlobalCategoryPolicy) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCInterfaceCategoryPolicy(MQCInterfaceCategoryPolicy) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfCategoryPolicyCBMap(MQCIfCategoryPolicyCBMap) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfCategoryPolicyCar(MQCIfCategoryPolicyCar) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCGlobalCategoryPolicyCBMap(MQCGlobalCategoryPolicyCBMap) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCGlobalCategoryPolicyCar(MQCGlobalCategoryPolicyCar) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfCategoryPolicyAccount(MQCIfCategoryPolicyAccount) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCGlobalCategoryPolicyAccount(MQCGlobalCategoryPolicyAccount) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfCategoryPolicyAF(MQCIfCategoryPolicyAF) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfCategoryPolicyEF(MQCIfCategoryPolicyEF) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfCategoryPolicyWFQ(MQCIfCategoryPolicyWFQ) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCIfCategoryPolicyGts(MQCIfCategoryPolicyGts) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCGlobalCategoryPolicyGts(MQCGlobalCategoryPolicyGts) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCVSIPolicy(MQCVSIPolicy) returns (grpc_service.GetJsonReply) {}
+    rpc GetJsonMQCVSIPolicyCBMap(MQCVSIPolicyCBMap) returns (grpc_service.GetJsonReply) {}
+}

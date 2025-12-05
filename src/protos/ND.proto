@@ -1,0 +1,25 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  nd;
+message NdTableEvent {
+    message NdTable {
+        optional uint32 IfIndex = 1;
+        optional string Ipv6Address = 2;
+        optional string MacAddress = 3;
+        optional uint32 VLANID = 4;
+        optional uint32 PortIndex = 5;
+        optional uint32 VrfIndex = 6;
+        optional uint32 Type = 7;
+        optional uint32 State = 8;
+        optional uint32 AgeTime = 9;
+        optional uint32 Sequence = 10;
+    }
+    repeated NdTable ndtable = 1;
+}
+message EventStream {
+    optional string stream_name = 1;
+}
+service NDService {
+    rpc SubscribeNdTableEvent(NdTableEvent) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeEventStream(EventStream) returns (grpc_service.SubscribeReply) {}
+}

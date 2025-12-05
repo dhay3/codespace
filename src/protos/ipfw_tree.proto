@@ -1,0 +1,13 @@
+syntax = "proto2";
+import "grpc_service.proto";
+package  ipfw_event;
+message TcpHandshakingEvent {
+    optional string DataBase64 = 1;
+}
+message EventStream {
+    optional string stream_name = 1;
+}
+service ipfw_eventService {
+    rpc SubscribeTcpHandshakingEvent(TcpHandshakingEvent) returns (grpc_service.SubscribeReply) {}
+    rpc SubscribeEventStream(EventStream) returns (grpc_service.SubscribeReply) {}
+}
