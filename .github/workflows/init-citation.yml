@@ -61,7 +61,7 @@ jobs:
       - evars
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Create CITATION.cff
         env:
           CFF_VERSION: ${{ inputs.cff-version }}
