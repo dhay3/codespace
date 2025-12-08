@@ -13,7 +13,7 @@
     "**/__pycache__": true,
     "**/.idea": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "prettier.prettier-vscode",
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
@@ -24,5 +24,6 @@
     "format": {
       "quote-style": "single"
     }
-  }
+  },
+  "terminal.integrated.inheritEnv": false
 }
