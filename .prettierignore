@@ -2,9 +2,9 @@
 **/.git
 **/.conda
 **/.venv
-**/.husky/_/
+**/.husky/_
 **/node_modules
-
+**/__pycache__
 
 docs/
 bundle/

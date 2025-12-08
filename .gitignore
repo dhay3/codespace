@@ -1,7 +1,8 @@
-.idea/
-.conda/
-.venv/
-node_modules/
+**/.idea/
+**/.conda/
+**/.venv/
+**/node_modules/
+**/__pycache__/
 
 logs/
 debug/
