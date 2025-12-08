@@ -9,13 +9,14 @@
 /.venv/
 /docs/
 
-.editorconfig
-.gitignore
-.gitattributes
-.gitmojirc.json
 .commitlintrc
-.shellcheckrc
+.editorconfig
+.gitattributes
+.gitignore
+.gitmojirc.json
+.prettierignore
 .prettierrc
+.shellcheckrc
 *.md
 
 CNAME
