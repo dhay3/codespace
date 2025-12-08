@@ -8,3 +8,13 @@
 
 docs/
 bundle/
+
+.commitlintrc
+.editorconfig
+.gitattributes
+.gitignore
+.prettierignore
+.shellcheckrc
+*.md
+
+CNAME
