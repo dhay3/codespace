@@ -36,25 +36,25 @@ Subject to interruption strictly under the following conditions:
 2. Analyse the databases schema, data flow and CI(`.github/workflows`).
 3. Analyse the conventions and constraints of the current project.
 4. Analyse the intentions of the current project, and guess the prospective action.
-5. Produce `docs/auto/ALIGN_ANALYSIS.md`, summarise the project with a comprehensive description and graphs.
+5. Produce `docs/auto/Align/ANALYSIS.md`, summarise the project with a comprehensive description and graphs.
 
 ### Step 2. Requirements Confirmation
 
-1. If `docs/auto/ALIGN_REQUEST.md` is absent, it is imperative to trigger an interruption to solicit a synopsis of requirements and create `docs/auto/ALIGN_REQUEST.md`; otherwise, use `docs/auto/ALIGN_REQUEST.md` as requirements.
-2. Based on `docs/auto/ALIGN_ANALYSIS.md` and `docs/auto/ALIGN_REQUEST.md`, formulate a structured inventory(`docs/auto/ALIGN_INVENTORY.md`) of ambiguity and indeterminacy arranged according to precedence; trying to answer autonomously, predicated upon the extant project content and the investigation of analogous engineering endeavors and industry expertise, authorized to trigger an interruption when independent resolution prove unfeasible.
-3. Refine `docs/auto/ALIGN_REQUEST.md` into precise requirement specifications, based on `docs/auto/ALIGN_INVENTORY.md`.
+1. If `docs/auto/Align/REQUEST.md` is absent, it is imperative to trigger an interruption to solicit a synopsis of requirements and create `docs/auto/Align/REQUEST.md`; otherwise, use `docs/auto/Align/REQUEST.md` as requirements.
+2. Based on `docs/auto/Align/ANALYSIS.md` and `docs/auto/Align/REQUEST.md`, formulate a structured inventory(`docs/auto/Align/INVENTORY.md`) of ambiguity and indeterminacy arranged according to precedence; trying to answer autonomously, predicated upon the extant project content and the investigation of analogous engineering endeavors and industry expertise, authorized to trigger an interruption when independent resolution prove unfeasible.
+3. Refine `docs/auto/Align/REQUEST.md` into precise requirement specifications, based on `docs/auto/Align/INVENTORY.md`.
 
 ### Step 3. Checklist
 
-- [ ] All inquiries of `docs/auto/ALIGN_INVENTORY.md` must be resolved.
-- [ ] Precise requirements in `docs/auto/ALIGN_REQUEST.md`.
+- [ ] All inquiries of `docs/auto/Align/INVENTORY.md` must be resolved.
+- [ ] Precise requirements in `docs/auto/Align/REQUEST.md`.
 - [ ] Update comprehension based on `docs/auto/*`.
 
 ## Stage 2. Design
 
-**Objective**: Based on `docs/auto/ALIGN_ANALYSIS.md`, `docs/auto/ALIGN_INVENTORY.md`, `docs/auto/ALIGN_REQUEST.md` , design the architecture.
+**Objective**: Based on `docs/auto/Align/ANALYSIS.md`, `docs/auto/Align/INVENTORY.md`, `docs/auto/Align/REQUEST.md` , design the architecture.
 
-You must follow those **Guiding Principles** in design:
+You must follow those **Guiding Principles** in Stage 2 Design:
 
 1. **Stratified**: Components characterised by disparate functionalities should be divided into different layers, eg [v2ray-core](https://github.com/v2fly/v2ray-core).
 2. **Decoupling**: Components should be decoupled as much as possible, but that doesn't mean no coupling at all.
@@ -64,17 +64,17 @@ You must follow those **Guiding Principles** in design:
 
 ### Step 1. Architect
 
-1. Produce `docs/auto/DESIGN_SCHEM.md`, a stratified architecture graph, includes pivotal components, module dependencies; a data flow graph; an error handling and mitigation strategies graph. All graphs are rendered via Mermaid.
+1. Produce `docs/auto/Design/SCHEM.md`, a stratified architecture graph, includes pivotal components, module dependencies; a data flow graph; an error handling and mitigation strategies graph. All graphs are rendered via Mermaid.
 
 ### Step 2. Prove
 
-1. Prove how to implement `docs/auto/ALIGN_REQUEST.md`, and the design is viable in `docs/auto/DESIGN_PROVE.md`.
+1. Prove how to implement `docs/auto/Align/REQUEST.md`, and the design is viable in `docs/auto/Design/PROVE.md`.
 
 ### Step 3. Checklist
 
-- [ ] Each graph has a comprehensive description.
-- [ ] Each pivotal component can provide independent substantiation in `docs/auto/DESIGN_PROVE.md`.
-- [ ] All the guiding principles have criteria in `docs/auto/DESIGN_PROVE.md`.
+- [ ] Each graph has a comprehensive description in `docs/auto/Design/SCHEM.md`
+- [ ] Each pivotal component can provide independent substantiation in `docs/auto/Design/PROVE.md`.
+- [ ] All the guiding principles have criteria in `docs/auto/Design/PROVE.md`.
 - [ ] Update comprehension based on `docs/auto/*`.
 
 ## Stage 3. Approve
@@ -94,10 +94,11 @@ You must follow those **Guiding Principles** in design:
 
 ## Stage 4. Automate
 
-**Objective**: Based on `docs/auto/DESIGN_SCHEM.md`, `docs/auto/DESIGN_PROVE.md`, implement the project.
+**Objective**: Based on `docs/auto/Design/SCHEM.md`, `docs/auto/Design/PROVE.md`, implement the project.
 
-### Step 1. Define Code Quality Criteria
+You must follow those **Guiding Principles** in Stage 4 Automate:
 
+- **Security**: Privacy content, eg, password, token, etc., should be encrypted or hashed; API keys should be stored in `.env` file and not to commit to git; authentication or authorization should be integrated with a human-machine verification if it is a web application.
 - **Readable**: Code should be concise and easily readable, primarily for humans to read.
 - **Reusable**: If the same logic appears three times, consider abstracting it into a reusable component and decide based on the assessed benefits of abstraction.
 - **Code Style**: Code style strictly adheres to the [Google Style Guide](https://google.github.io/styleguide).
@@ -116,29 +117,31 @@ def func(var1, var2):
  return var4
 ```
 
-### Step 2. Implement
+### Step 1. Construct
 
-- test module
-- **Security**: Privacy content, eg, password, token, etc., should be encrypted or hashed; authentication or authorization should be integrated with a human-machine verification.
-
-### Step 3. Code Review
-
-- ****:
-
-
-code review
-
-
-
-### Step 2. Acceptance
-
-Produce `docs/auto/IMPLEMENT.md` contains:
-
-- **Viability**: Prove the implementation is viable.
+1. Ensure that the development environment and dependencies comply with the requirements for this project.
+2. Implement the core functionality.
+3. Integrate test units covering boundary conditions and exceptional cases, and execute the test units.
 
 ## Stage 5. Revision
 
+**Objective**: Update the current project code according to `docs/auto/REVISION_REVISE.md`.
 
+### Step 1. Interprete
 
-## Stage 6. Access
+1.
 
+### Step 2. Revise
+
+1. Base on `docs/auto/REVSION_REVISE.md`, update the current project code.
+2.
+
+### Step 3. Checklist
+
+- [ ] All requirements in `docs/auto/REVSION_REVISE.md` are met.
+- [ ] Update comprehension based on `docs/auto/*`.
+
+## Stage 6. Post
+
+1. `docs/auto/Post/SUMMARY.md`
+2. `docs/auto/Post/TODO.md`

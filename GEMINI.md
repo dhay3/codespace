@@ -1,1 +1,1 @@
-You should read from `.rules/6A.md` as instructions.
+You should read from `.rules/__INIT__.md` as instructions.

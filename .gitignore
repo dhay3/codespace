@@ -9,4 +9,5 @@ debug/
 target/
 bundle/
 
+.env
 package-lock.json
