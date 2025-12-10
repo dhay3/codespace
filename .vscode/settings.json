@@ -13,6 +13,10 @@
     "**/__pycache__": true,
     "**/.idea": true
   },
+  "files.associations": {
+    "*.mdc": "markdown",
+    "*.mdx": "markdown"
+  },
   "editor.defaultFormatter": "prettier.prettier-vscode",
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
@@ -20,9 +24,7 @@
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "files.associations": {
-    "*.mdc": "markdown"
-  },
+
   "ruff.configuration": {
     "format": {
       "quote-style": "single"

@@ -2,7 +2,7 @@
 
 Read from `.rules/project-character.mdc`.
 
-## Project Initialization
+## Project Initialisation
 
 **!!! ONLY AFFECTED WHNE `src/` IS EMPTY !!!**
 
@@ -12,6 +12,6 @@ Read from `.rules/project-init.mdc`.
 
 Read from `.rules/project-structure.mdc`.
 
-## Project Developemnt
+## Project Development
 
 Read from `.rules/project-dev.mdc`.

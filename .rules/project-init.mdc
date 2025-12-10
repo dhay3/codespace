@@ -3,114 +3,288 @@ description: project initialisation instructions
 alwaysApply: false
 ---
 
-# Workflows
+# Project Initialization Workflow
 
-Stages are to be executed autonomously, and report the progress of each stage.
+This document defines the autonomous workflow for initializing and implementing new projects. Execute stages sequentially, reporting progress at each step.
 
-**Interruption Strategy**
+## Guiding Principles
 
-Subject to interruption strictly under the following conditions:
+### Interruption Strategy
 
-1. In the face of making critical decisions, or ambiguity and indeterminacy.
-2. In the face of questions that may need to be asked to the user.
-3. In the face of `.rules/*.md` should be updated.
+Interrupt execution **only** under these conditions:
 
-**Restore Strategy**
+1. **Critical Decisions**: Ambiguity or indeterminacy that requires user input to resolve
+2. **User Clarification**: Questions that cannot be answered through code analysis or industry best practices
+3. **Rule Updates**: When `.rules/*.mdc` files need modification to reflect new project patterns
 
-1. Save the context of the interruption.
-2. Provide a detailed description of the issue and initiate an interruption.
-3. Resume the execution of the task from the interruption.
+### Restore Strategy
+
+When interruption occurs:
+
+1. **Save Context**: Document current stage, step, and all relevant state
+2. **Describe Issue**: Provide detailed explanation of the blocking issue
+3. **Resume Execution**: Continue from the interruption point after resolution
+
+---
 
 ## Stage 1: Align
 
-**Objective**: Turn the fuzzy requirements into precise, executable specifications.
+**Objective**: Transform fuzzy requirements into precise, executable specifications.
 
 ### Step 1. Analysis
 
-1. Analyse the language(s), tech stack(frameworks and pivotal components), dependencies from code(under `src/`) and documentations(under `docs/` or `README.md`).
-2. Analyse the databases' schemas, data flow and CI(`.github/workflows`).
-3. Analyse the conventions and constraints of the current project.
-4. Analyse the intentions of the current project, and guess the prospective action.
-5. Produce `docs/auto/align/analysis.md`, summarise the project with a comprehensive description and graphs.
+Conduct comprehensive project analysis and produce `docs/auto/align/analysis.md`:
 
-### Step 2. Request
+1. **Technology Stack**
+   - Identify programming language(s) and versions
+   - Document frameworks and key libraries
+   - Map dependencies from `src/`, `package.json`, `environment.yml`, etc.
+   - Analyze build tools (`Makefile`, `package.json` scripts)
 
-1. If `docs/auto/align/request.md` is absent, it is imperative to trigger an interruption to solicit a synopsis of requirements and create `docs/auto/align/request.md`; otherwise, use `docs/auto/align/request.md` as requirements.
-2. Based on `docs/auto/align/analysis.md` and `docs/auto/align/request.md`, formulate a structured inventory(`docs/auto/align/request_inventory.md`) of ambiguity and indeterminacy arranged according to precedence; trying to answer autonomously, predicated upon the extant project content and the investigation of analogous engineering endeavors and industry expertise, authorized to trigger an interruption when independent resolution prove unfeasible.
-3. Refine `docs/auto/align/request.md` into precise requirement specifications, based on `docs/auto/align/request_inventory.md`.
+2. **Architecture & Data Flow**
+   - Document database schemas and ORM patterns
+   - Map data flow between components
+   - Analyze CI/CD pipelines (`.github/workflows`)
+   - Identify integration points and APIs
 
-### Step 3. Approve
+3. **Project Conventions**
+   - Code style and formatting rules (`.editorconfig`, `.prettierrc`)
+   - Commit conventions (`.commitlintrc`, `.gitmojirc.json`)
+   - Testing patterns and coverage requirements
+   - Documentation standards
 
-1. Ask for approval.
-2. If approved, skip to the next step; else, return to step 2.
+4. **Project Intent**
+   - Analyze existing documentation (`README.md`, `docs/`)
+   - Infer project goals from current implementation
+   - Identify prospective features or enhancements
 
-### Step 4. Checklist
+5. **Output**: Create `docs/auto/align/analysis.md` with:
+   - Comprehensive project summary
+   - Mermaid diagrams (architecture, data flow, dependencies)
+   - Technology stack breakdown
+   - Key findings and observations
 
-- [ ] All inquiries of `docs/auto/align/request_inventory.md` must be resolved.
-- [ ] Precise requirements in `docs/auto/align/request.md`.
-- [ ] Update comprehension based on `docs/auto/align/*`.
+### Step 2. Requirements
 
-## Stage 2. Design
+Refine requirements through structured analysis:
 
-**Objective**: Based on `docs/auto/align/analysis.md`, `docs/auto/align/request.md` design the architecture.
+1. **Initial Requirements**
+   - If `docs/auto/align/request.md` exists: Use as baseline
+   - If absent: **INTERRUPT** to solicit requirements, then create `docs/auto/align/request.md`
 
-### Step 1. Architect
+2. **Ambiguity Resolution**
+   - Create `docs/auto/align/request_inventory.md` listing:
+     - Ambiguous requirements (prioritized by impact)
+     - Missing specifications
+     - Conflicting constraints
+   - Attempt autonomous resolution via:
+     - Analysis of existing project patterns
+     - Research of similar engineering solutions
+     - Industry best practices and standards
+   - **INTERRUPT** only when autonomous resolution is infeasible
 
-1. Produce `docs/auto/design/architect.md`, a stratified architecture graph, includes pivotal components, module dependencies; a data flow graph; and an error handling and mitigation strategies graph. All graphs are rendered via Mermaid with a comprehensive description.
+3. **Specification Refinement**
+   - Update `docs/auto/align/request.md` with:
+     - Precise, testable requirements
+     - Acceptance criteria for each feature
+     - Non-functional requirements (performance, security, etc.)
+     - Dependencies and constraints
 
-### Step 2. Prove
+### Step 3. Approval
 
-1. Prove how to implement `docs/auto/align/request.md`, and the design is viable in `docs/auto/design/prove.md`.
-
-### Step 3. Approve
-
-1. Ask for approval.
-2. If approved, skip to the next step; else, return to step 1.
-
-### Step 4. Checklist
-
-- [ ] The design covers all requirements, and the technical solution is truly feasible.
-- [ ] Each pivotal component can provide independent substantiation in `docs/auto/design/prove.md`.
-- [ ] All the guiding principles have criteria in `docs/auto/design/prove.md`.
-- [ ] Update comprehension based on `docs/auto/*`.
-
-## Stage 3. Implement
-
-**Objective**: Based on `docs/auto/design/architect.md`, `docs/auto/design/prove.md`, implement the project. The code should be generated in `src/`.
-
-### Step 1. Construct
-
-1. Configure the development environment and dependencies to comply with the requirements for this project.
-2. Implement the logic of the design in code, test first as possible, then implement it.
-
-### Step 2. Test
-
-1. Integrate test units covering normal cases, boundary cases and exceptional cases.
-2. Execute the test units; if an error occurs, fix it autonomously; if you fail to fix it, issue an interruption.
-
-### Step 3. Compile
-
-1. Compile the project by Makefile for different platforms(windows, linux, macos, generic is better).
-2. Test the compiled binary in a sandbox environment.
+1. Request user approval of refined requirements
+2. If **approved**: Proceed to Step 4
+3. If **rejected**: Return to Step 2 with feedback
 
 ### Step 4. Checklist
 
-- [ ] All requirements have been implemented.
-- [ ] All boundary cases and exceptional cases tests have been passed.
-- [ ] The pivotal components reverse extensibility.
-- [ ] The compiled binary can run on different platforms.
-- [ ] Update comprehension based on `src/`.
+- [ ] `docs/auto/align/analysis.md` contains comprehensive project analysis
+- [ ] All ambiguities in `docs/auto/align/request_inventory.md` are resolved
+- [ ] `docs/auto/align/request.md` contains precise, testable requirements
+- [ ] User has approved the requirements
+- [ ] Project comprehension updated based on alignment artifacts
 
-## Stage 4. Post
+---
 
-**Objective**: Accept the project.
+## Stage 2: Design
 
-### Step 1. Report
+**Objective**: Design a viable architecture that fulfills all requirements.
 
-1. Produce `docs/auto/post/summary.md`, which contains the project summary report.
-2. Produce `docs/auto/post/todo.md`, which contains the project todo list.
+### Step 1. Architecture
 
-### Step 2. Checklist
+Create `docs/auto/design/architect.md` with comprehensive design documentation:
 
-- [ ] The implementation is consistent with the design document.
-- [ ] All checklists have been ticked.
+1. **System Architecture**
+   - Layered architecture diagram (Mermaid)
+   - Key components and their responsibilities
+   - Module dependencies and boundaries
+   - Technology choices for each layer
+
+2. **Data Flow**
+   - Data flow diagrams (Mermaid)
+   - API contracts and interfaces
+   - Database schema design
+   - State management patterns
+
+3. **Error Handling**
+   - Error handling strategies (Mermaid flowchart)
+   - Logging and monitoring approach
+   - Failure recovery mechanisms
+   - Validation and sanitization patterns
+
+4. **Cross-Cutting Concerns**
+   - Security considerations
+   - Performance optimization strategies
+   - Scalability approach
+   - Testing strategy
+
+### Step 2. Proof of Viability
+
+Create `docs/auto/design/prove.md` demonstrating design feasibility:
+
+1. **Implementation Proof**
+   - For each major component: Explain implementation approach
+   - Identify potential technical challenges and solutions
+   - Reference libraries, frameworks, or patterns to be used
+
+2. **Requirement Mapping**
+   - Map each requirement from `docs/auto/align/request.md` to design components
+   - Explain how design fulfills each requirement
+   - Identify any trade-offs or limitations
+
+3. **Design Principles**
+   - Document guiding principles (e.g., SOLID, DRY, KISS)
+   - Provide criteria for evaluating design decisions
+   - Explain rationale for key architectural choices
+
+### Step 3. Approval
+
+1. Request user approval of architecture and proof
+2. If **approved**: Proceed to Step 4
+3. If **rejected**: Return to Step 1 with feedback
+
+### Step 4. Checklist
+
+- [ ] `docs/auto/design/architect.md` contains complete architecture with Mermaid diagrams
+- [ ] Design covers all requirements from `docs/auto/align/request.md`
+- [ ] `docs/auto/design/prove.md` demonstrates technical feasibility
+- [ ] Each key component has implementation proof
+- [ ] Design principles are documented with evaluation criteria
+- [ ] User has approved the design
+- [ ] Project comprehension updated based on design artifacts
+
+---
+
+## Stage 3: Implement
+
+**Objective**: Implement the designed architecture with comprehensive testing.
+
+### Step 1. Construction
+
+Build the implementation following the approved design:
+
+1. **Environment Setup**
+   - Configure development environment per project requirements
+   - Install dependencies (use `conda` + `uv` per project conventions)
+   - Set up build tools and scripts
+   - Configure linters and formatters
+
+2. **Test-Driven Development**
+   - Write tests first when feasible (TDD approach)
+   - Implement features incrementally
+   - Follow project coding conventions
+   - Document complex logic and design decisions
+
+3. **Code Organization**
+   - Place implementation in `src/` directory
+   - Follow project structure conventions
+   - Maintain clear module boundaries
+   - Use meaningful names and clear interfaces
+
+### Step 2. Testing
+
+Ensure comprehensive test coverage:
+
+1. **Test Implementation**
+   - **Normal Cases**: Happy path scenarios
+   - **Boundary Cases**: Edge conditions and limits
+   - **Exceptional Cases**: Error conditions and invalid inputs
+   - **Integration Tests**: Component interactions
+
+2. **Test Execution**
+   - Run all test suites
+   - Achieve required coverage thresholds
+   - If tests fail:
+     - Attempt autonomous fix
+     - If fix unsuccessful: **INTERRUPT** with detailed error analysis
+
+3. **Quality Checks**
+   - Run diagnostics on modified files
+   - Fix linting and formatting issues
+   - Ensure code meets project quality standards
+
+### Step 3. Build & Validation
+
+Compile and validate the implementation:
+
+1. **Multi-Platform Build**
+   - Use `Makefile` for cross-platform builds
+   - Target platforms: Linux, macOS, Windows (when applicable)
+   - Prefer generic/portable solutions
+
+2. **Sandbox Testing**
+   - Test compiled artifacts in isolated environment
+   - Validate functionality matches requirements
+   - Verify performance and resource usage
+
+### Step 4. Checklist
+
+- [ ] All requirements from `docs/auto/align/request.md` are implemented
+- [ ] Comprehensive tests cover normal, boundary, and exceptional cases
+- [ ] All tests pass successfully
+- [ ] Code quality checks pass (linting, formatting, diagnostics)
+- [ ] Key components are designed for extensibility
+- [ ] Build succeeds for target platforms
+- [ ] Compiled artifacts validated in sandbox environment
+- [ ] Project comprehension updated based on implementation
+
+---
+
+## Stage 4: Finalization
+
+**Objective**: Document completion and prepare for acceptance.
+
+### Step 1. Documentation
+
+Create comprehensive project documentation:
+
+1. **Summary Report** (`docs/auto/post/summary.md`)
+   - Project overview and objectives
+   - Key features implemented
+   - Architecture highlights
+   - Testing results and coverage
+   - Known limitations or constraints
+   - Deployment considerations
+
+2. **Future Work** (`docs/auto/post/todo.md`)
+   - Potential enhancements
+   - Technical debt items
+   - Optimization opportunities
+   - Feature requests for future iterations
+
+### Step 2. Final Checklist
+
+- [ ] Implementation matches design in `docs/auto/design/architect.md`
+- [ ] All stage checklists are complete
+- [ ] Documentation is comprehensive and accurate
+- [ ] Code is production-ready
+- [ ] User acceptance criteria are met
+
+---
+
+## Notes
+
+- **Autonomous Execution**: Minimize interruptions; resolve issues independently when possible
+- **Documentation**: Keep all artifacts up-to-date throughout the process
+- **Quality**: Maintain high standards for code, tests, and documentation
+- **Communication**: Provide clear progress reports at each stage
