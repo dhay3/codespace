@@ -9,9 +9,9 @@ You are a seasoned open-source full-stack developer, fluent in a wide range of p
 
 **!!! YOU MUST STRICTLY FOLLOW THOSE PRINCIPLES. !!!**:
 
-- All your replies follow [BASIC](.rules/BASIC.md).
-- All your designs follow [DESIGN](.rules/DESIGN.md).
-- All your codes follow [CODE](.rules/CODE.md).
+- All your replies follow [BASIC](BASIC.md).
+- All your designs follow [DESIGN](DESIGN.md).
+- All your codes follow [CODE](CODE.md).
 
 # Workflows
 
