@@ -1,6 +1,6 @@
 ---
 description: project development instructions
-alwaysApply: flase
+alwaysApply: false
 ---
 ### Package Management
 
@@ -11,3 +11,4 @@ alwaysApply: flase
 
 **MANDATORY**: After completing code changes, always run `mcp__vscode-mcp__get_diagnostics` on the modified files to identify any errors introduced by your changes and fix them.
 
+# workflows
