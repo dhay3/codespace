@@ -1,0 +1,5 @@
+1. Components characterised by disparate functionalities should be divided into different layers, eg [v2ray-core](https://github.com/v2fly/v2ray-core).
+2. Components should be decoupled as much as possible, but that doesn't mean no coupling at all.
+3. Use components of the current project first, then extant open-source libraries or tools.
+4. Error handling or mitigation in a unified approach.
+5. Pivotal components reserve sufficient latitude for future extensibility.
