@@ -1,5 +1,5 @@
 ---
-description: project initialization instructions
+description: project initialisation instructions
 alwaysApply: false
 ---
 
@@ -80,25 +80,25 @@ Subject to interruption strictly under the following conditions:
 
 ### Step 1. Construct
 
-1. Configure the development environment and dependencies comply with the requirements for this project.
-2. Implement the logic of design in code, test first as possible then implement it.
+1. Configure the development environment and dependencies to comply with the requirements for this project.
+2. Implement the logic of the design in code, test first as possible, then implement it.
 
 ### Step 2. Test
 
 1. Integrate test units covering normal cases, boundary cases and exceptional cases.
-2. Execute the test units; if an error occurs, fix it autonomously; fail to fix it, issue an interruption.
+2. Execute the test units; if an error occurs, fix it autonomously; if you fail to fix it, issue an interruption.
 
 ### Step 3. Compile
 
 1. Compile the project by Makefile for different platforms(windows, linux, macos, generic is better).
-2. Test the compiled binary in sandbox environment.
+2. Test the compiled binary in a sandbox environment.
 
 ### Step 4. Checklist
 
 - [ ] All requirements have been implemented.
 - [ ] All boundary cases and exceptional cases tests have been passed.
 - [ ] The pivotal components reverse extensibility.
-- [ ] The compiled binary can run on different platform.
+- [ ] The compiled binary can run on different platforms.
 - [ ] Update comprehension based on `src/`.
 
 ## Stage 4. Post
@@ -107,8 +107,8 @@ Subject to interruption strictly under the following conditions:
 
 ### Step 1. Report
 
-1. Produce `docs/auto/post/summary.md`, contains the project summary report.
-2. Produce `docs/auto/post/todo.md`, contains the project todo list.
+1. Produce `docs/auto/post/summary.md`, which contains the project summary report.
+2. Produce `docs/auto/post/todo.md`, which contains the project todo list.
 
 ### Step 2. Checklist
 
