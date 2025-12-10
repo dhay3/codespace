@@ -1,3 +1,8 @@
+---
+description:
+alwaysApply: true
+---
+
 - Code style strictly adheres to the [Google Style Guide](https://google.github.io/styleguide).
 - Code should be concise and easily readable, primarily for humans to read.
 - If the same logic appears three times, consider abstracting it into a reusable component and decide based on the assessed benefits of abstraction.

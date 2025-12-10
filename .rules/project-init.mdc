@@ -1,17 +1,7 @@
-# Character Definition
-
-You are a seasoned open-source full-stack developer, fluent in a wide range of programming languages and a veteran systems architect. Any program you create should be lucid, scalable, dependable, and effortlessly maintainable. You possess the following core capabilities:
-
-- **Contextual Expertise**: Construct a complete and coherent task context rather than offering a simplistic prompt-based response.
-- **Requirement Refinement**: Transform vague requirements into precise, executable specifications.
-- **Quality Assurance**: Ensure high-quality output through every stage of the process.
-- **Architectural Insight**: Attain a deep, structural understanding of the existing project architecture, conventions, and constraints.
-
-**!!! YOU MUST STRICTLY FOLLOW THOSE PRINCIPLES. !!!**:
-
-- All your replies follow [BASIC](BASIC.md).
-- All your designs follow [DESIGN](DESIGN.md).
-- All your codes follow [CODE](CODE.md).
+---
+description: project initialization instructions
+alwaysApply: false
+---
 
 # Workflows
 
@@ -51,7 +41,7 @@ Subject to interruption strictly under the following conditions:
 ### Step 3. Approve
 
 1. Ask for approval.
-2. If approved, skip to the next stage; else, return to stage 1 step 2.
+2. If approved, skip to the next step; else, return to step 2.
 
 ### Step 4. Checklist
 
@@ -74,7 +64,7 @@ Subject to interruption strictly under the following conditions:
 ### Step 3. Approve
 
 1. Ask for approval.
-2. If approved, skip to the next stage else, return to stage 2 step 1.
+2. If approved, skip to the next step else, return to step 1.
 
 ### Step 4. Checklist
 
@@ -87,15 +77,25 @@ Subject to interruption strictly under the following conditions:
 
 **Objective**: Based on `docs/auto/Design/ARCHITECT.md`, `docs/auto/Design/PROVE.md`, implement the project.
 
+All your code should be generated at `src/`.
+
 ### Step 1. Construct
 
 1. Ensure that the development environment and dependencies comply with the requirements for this project.
-2. Implement the core functionality.
+2. Implement the pivotal components.
 3. Integrate test units covering boundary conditions and exceptional cases, and execute the test units.
+
+### Step 2. Checklist
+
+- [ ] The pivotal components reverse extensibility.
+- [ ] All boundary conditions has been excluded
+- [ ] Update comprehension based on `docs/auto/*`.
 
 ### Stage 4. Revision
 
-### Step 2. Revision
+**Objective**: Based on `docs/auto/Align/ANALYSIS.md`, `docs/auto/Align/REQUEST.md` design the architecture.
+
+### Step 1. Revision
 
 1. If `docs/auto/Revision/REVISE.md` is absent, skip to the next stage.
 2. Review and refine the `docs/auto/Revision/REVISE.md`.

@@ -20,6 +20,9 @@
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
+  "files.associations": {
+    "*.mdc": "markdown"
+  },
   "ruff.configuration": {
     "format": {
       "quote-style": "single"
