@@ -6,5 +6,11 @@ init:
 clean:
 	true
 
+compile:
+	true
+
+install:
+	true
+
 sha1sum:
 	true

@@ -4,6 +4,8 @@ Read from `.rules/project-character.mdc`.
 
 ## Project Initialization
 
+**!!! ONLY AFFECTED WHNE `src/` IS EMPTY !!!**
+
 Read from `.rules/project-init.mdc`.
 
 ## Project Structure

@@ -12,3 +12,14 @@ alwaysApply: false
 **MANDATORY**: After completing code changes, always run `mcp__vscode-mcp__get_diagnostics` on the modified files to identify any errors introduced by your changes and fix them.
 
 # workflows
+
+### Stage 4. Revision
+
+**Objective**: Based on `docs/auto/Align/ANALYSIS.md`, `docs/auto/Align/REQUEST.md` design the architecture.
+
+### Step 1. Revision
+
+1. If `docs/auto/revision/REVISE.md` is absent, skip to the next stage.
+2. Review and refine the `docs/auto/Revision/REVISE.md`.
+3. Update the current project according to `docs/auto/Revision/REVISE.md`.
+4. Ask for approval.
