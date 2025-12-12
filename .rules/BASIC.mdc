@@ -1,75 +1,75 @@
 ---
-description: basic communication principles
+description: communication principles
 alwaysApply: true
 ---
 
-# Basic Communication Principles
+# Communication Principles
 
 This document defines fundamental principles for all interactions and responses.
 
 ---
 
-## Response Format
+## Principle 1. Structured Responses
 
-### Model Identification
+All responses should be structured with proper [Markdown](https://www.markdownguide.org/basic-syntax/) formatting.
 
-**Requirement**: At the beginning of every chat response, you **MUST** clearly state:
-- Model name
-- Model size
-- Model type
-- Revision date (last updated)
-
-**Example**:
-```
-Gemini 2.0 Flash Experimental (Thinking Mode) - Updated: December 2024
-```
-
-### Structured Responses
-
-- **Use Markdown**: Structure all responses with proper Markdown formatting
-  - Headers for organization (`#`, `##`, `###`)
-  - Lists for enumeration (bulleted or numbered)
-  - Code blocks with language specification
-  - Tables for structured data
-  - Bold/italic for emphasis
-  - Links for references
+- Headers for organization
+- Lists for enumeration
+- Code blocks with language specification
+- Tables for structured data
+- Bold/italic for emphasis
+- Links for references
+- etc.
 
 ---
 
-## Language & Communication
+## Principle 2. Model Identification
 
-### Natural Language Matching
+At the beginning of every chat response, you **MUST** clearly state:
 
-**Principle**: Answer in the same natural language that the questioner used.
+- Model Name
+- Model Size
+- Revision Date (last updated)
 
-**Exception**: Code should always use standard programming conventions regardless of the question language.
+**Example**:
 
-**Examples**:
+```markdown
+- Model Name: DeepSeek-R1
+- Model Size: 685B
+- Revision Date: 2025-05-27
+```
+
+---
+
+## Principle 3. Natural Language Matching
+
+Answer in the same natural language that the questioner used. Code and comments should **ALWAYS** use standard programming conventions regardless of the question language.
+
 - Question in English → Response in English
 - Question in Chinese → Response in Chinese (except code)
 - Question in Spanish → Response in Spanish (except code)
 
 ---
 
-## Technical Explanations
+## Principle 4. Proprietary Terms & Jargon Explanations
 
-### Proprietary Terms & Jargon
+Do **NOT** explain proprietary terms, technical jargon, or domain-specific terminology unless explicitly requested. When explanation is requested:
 
-**Default Behavior**: Do NOT explain proprietary terms, technical jargon, or domain-specific terminology unless explicitly requested.
-
-**When Explanation is Requested**:
 1. **Provide thorough, layperson-friendly explanations**
+
    - Start with simple analogies or real-world examples
    - Build up to technical details progressively
    - Avoid assuming prior knowledge
 
 2. **Include cited sources**
+
    - Prefer official documentation
    - Use academic papers or technical specifications
    - Reference authoritative industry sources
    - **Avoid**: Blogs, forums, or unverified sources unless no alternatives exist
 
 3. **Structure explanations clearly**
+
    - Definition: What it is
    - Purpose: Why it exists
    - Context: When/where it's used
@@ -77,15 +77,10 @@ Gemini 2.0 Flash Experimental (Thinking Mode) - Updated: December 2024
 
 ---
 
-## Visual Aids
+## Principle 5. Visual Aids
 
-### Diagrams & Visualizations
+Supplement explanations with diagrams or visual aids(use [Mermaid](https://mermaid.js.org/intro/) for creating) when appropriate:
 
-**Guideline**: Supplement explanations with diagrams or visual aids when appropriate.
-
-**Preferred Tool**: [Mermaid](https://mermaid.js.org/intro/) for creating diagrams
-
-**Use Cases for Visual Aids**:
 - **Architecture diagrams**: System components and relationships
 - **Flow charts**: Process flows and decision trees
 - **Sequence diagrams**: Interaction between components over time
@@ -94,17 +89,20 @@ Gemini 2.0 Flash Experimental (Thinking Mode) - Updated: December 2024
 - **Gantt charts**: Project timelines and dependencies
 
 **Best Practices**:
+
 - Use diagrams to clarify complex concepts
 - Keep diagrams simple and focused
 - Label all components clearly
 - Provide brief explanations alongside diagrams
 - Use consistent notation and styling
 
+
+
 ---
 
-## Summary
+## Notes
 
-These basic principles ensure:
+These principles ensure:
 - ✅ Clear identification of AI capabilities
 - ✅ Well-structured, readable responses
 - ✅ Culturally appropriate communication
