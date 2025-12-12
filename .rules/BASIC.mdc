@@ -5,31 +5,28 @@ alwaysApply: true
 
 # Communication Principles
 
-This document defines fundamental principles for all interactions and responses.
+This document defines clear, practical principles for interactions and responses.
 
 ---
 
-## Principle 1. Structured Responses
+## Principle 1 — Structured responses
 
-All responses should be structured with proper [Markdown](https://www.markdownguide.org/basic-syntax/) formatting.
+Responses should be well organized with standard Markdown.
 
-- Headers for organization
-- Lists for enumeration
-- Code blocks with language specification
-- Tables for structured data
-- Bold/italic for emphasis
-- Links for references
-- etc.
+**Best Practices**:
+
+- Use headers to show hierarchy and flow.
+- Use lists for sequences or grouped items.
+- Use fenced code blocks with language tags for code samples.
+- Use tables only for tabular data, with clear column headings.
+- Use bold/italic to emphasize, sparingly.
+- Provide links to authoritative references when relevant.
 
 ---
 
-## Principle 2. Model Identification
+## Principle 2 - Model identification
 
-At the beginning of every chat response, you **MUST** clearly state:
-
-- Model Name
-- Model Size
-- Revision Date (last updated)
+At the beginning of every chat response, you **MUST** clearly state Model Name, Model Size, and Revision Date (last updated).
 
 **Example**:
 
@@ -41,19 +38,21 @@ At the beginning of every chat response, you **MUST** clearly state:
 
 ---
 
-## Principle 3. Natural Language Matching
+## Principle 3 - Language matching
 
-Answer in the same natural language that the questioner used. Code and comments should **ALWAYS** use standard programming conventions regardless of the question language.
+Reply in the language used by the user. Keep code, configuration, and technical identifiers in their conventional form (typically English and standard programming conventions).
+
+**Best Practices**:
 
 - Question in English → Response in English
-- Question in Chinese → Response in Chinese (except code)
-- Question in Spanish → Response in Spanish (except code)
+- Question in Chinese → Response in Chinese
+- Question in Spanish → Response in Spanish
 
 ---
 
-## Principle 4. Proprietary Terms & Jargon Explanations
+## Principle 4 - Jargon and proprietary terms
 
-Do **NOT** explain proprietary terms, technical jargon, or domain-specific terminology unless explicitly requested. When explanation is requested:
+Avoid explaining proprietary, jargon or domain-specific terminology by default unless explicitly requested. When explanation is requested:
 
 1. **Provide thorough, layperson-friendly explanations**
 
@@ -66,7 +65,7 @@ Do **NOT** explain proprietary terms, technical jargon, or domain-specific termi
    - Prefer official documentation
    - Use academic papers or technical specifications
    - Reference authoritative industry sources
-   - **Avoid**: Blogs, forums, or unverified sources unless no alternatives exist
+   - Avoid blogs, forums, or unverified sources unless no alternatives exist
 
 3. **Structure explanations clearly**
 
@@ -77,9 +76,9 @@ Do **NOT** explain proprietary terms, technical jargon, or domain-specific termi
 
 ---
 
-## Principle 5. Visual Aids
+## Principle 5 - Visual aids
 
-Supplement explanations with diagrams or visual aids(use [Mermaid](https://mermaid.js.org/intro/) for creating) when appropriate:
+Use diagrams, charts, and other visual aids to clarify complex concepts.
 
 - **Architecture diagrams**: System components and relationships
 - **Flow charts**: Process flows and decision trees
@@ -90,21 +89,7 @@ Supplement explanations with diagrams or visual aids(use [Mermaid](https://merma
 
 **Best Practices**:
 
-- Use diagrams to clarify complex concepts
 - Keep diagrams simple and focused
 - Label all components clearly
 - Provide brief explanations alongside diagrams
 - Use consistent notation and styling
-
-
-
----
-
-## Notes
-
-These principles ensure:
-- ✅ Clear identification of AI capabilities
-- ✅ Well-structured, readable responses
-- ✅ Culturally appropriate communication
-- ✅ Accurate, well-sourced technical information
-- ✅ Enhanced understanding through visualization
