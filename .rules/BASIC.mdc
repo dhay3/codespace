@@ -18,7 +18,7 @@ Responses should be well organized with standard Markdown.
 - Use headers to show hierarchy and flow.
 - Use lists for sequences or grouped items.
 - Use fenced code blocks with language tags for code samples.
-- Use tables only for tabular data, with clear column headings.
+- Use tables for tabular data, with clear column headings.
 - Use bold/italic to emphasize, sparingly.
 - Provide links to authoritative references when relevant.
 
@@ -89,6 +89,7 @@ Use diagrams, charts, and other visual aids to clarify complex concepts.
 
 **Best Practices**:
 
+- Prefer to use [Mermaid](https://mermaid.js.org/intro/) to render
 - Keep diagrams simple and focused
 - Label all components clearly
 - Provide brief explanations alongside diagrams
