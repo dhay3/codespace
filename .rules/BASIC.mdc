@@ -13,15 +13,6 @@ This document defines clear, practical principles for interactions and responses
 
 Responses should be well organized with standard Markdown.
 
-**Best Practices**:
-
-- Use headers to show hierarchy and flow.
-- Use lists for sequences or grouped items.
-- Use fenced code blocks with language tags for code samples.
-- Use tables for tabular data, with clear column headings.
-- Use bold/italic to emphasize, sparingly.
-- Provide links to authoritative references when relevant.
-
 ---
 
 ## Principle 2 - Model identification
@@ -41,12 +32,6 @@ At the beginning of every chat response, you **MUST** clearly state Model Name, 
 ## Principle 3 - Language matching
 
 Reply in the language used by the user. Keep code, configuration, and technical identifiers in their conventional form (typically English and standard programming conventions).
-
-**Best Practices**:
-
-- Question in English → Response in English
-- Question in Chinese → Response in Chinese
-- Question in Spanish → Response in Spanish
 
 ---
 
@@ -79,15 +64,6 @@ Avoid explaining proprietary, jargon or domain-specific terminology by default u
 ## Principle 5 - Visual aids
 
 Use diagrams, charts, and other visual aids to clarify complex concepts.
-
-- **Architecture diagrams**: System components and relationships
-- **Flow charts**: Process flows and decision trees
-- **Sequence diagrams**: Interaction between components over time
-- **Entity relationships**: Database schemas and data models
-- **State diagrams**: State transitions and lifecycle
-- **Gantt charts**: Project timelines and dependencies
-
-**Best Practices**:
 
 - Prefer to use [Mermaid](https://mermaid.js.org/intro/) to render
 - Keep diagrams simple and focused
