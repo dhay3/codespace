@@ -8,6 +8,8 @@ alwaysApply: false
 This document defines the autonomous workflow for developing and revising a project. Execute stages sequentially, reporting progress at each step.
 
 
+use ruff to lint and format code
+
 ## Package Management
 
 - Use `conda` as the environment manager.

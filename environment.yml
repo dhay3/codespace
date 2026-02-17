@@ -1,4 +1,4 @@
-name: codespace
+name: /home/cc/GitWD/github-codespace/.conda
 channels:
   - defaults
   - conda-forge
@@ -37,3 +37,5 @@ dependencies:
   - xorg-xorgproto=2024.1
   - xz=5.6.4
   - zlib=1.3.1
+  - pip:
+      - ruff==0.14.9

@@ -1,0 +1,42 @@
+function log() {
+  if [[ $1 = 's' ]]; then
+    echo $(date +"[%F %T] [success]")$2
+  elif [[ $1 = 'e' ]]; then
+    echo $(date +"[%F %T] [error]")$2
+  elif [[ $1 = 'i' ]]; then
+    echo $(date +"[%F %T] [info]")$2
+  fi
+}
+
+function keylog_and_exit() {
+  log e "$2"
+  exit 1
+}
+
+if [[ -e /etc/redhat-release && $(cat /etc/redhat-release | grep 'CentOS' | wc -l) -gt 0 ]]; then
+  SYSTEM='Centos'
+  log i "系统:$SYSTEM"
+elif [[ -e /etc/issue && $(cat /etc/issue | grep 'Ubuntu' | wc -l) -gt 0 ]]; then
+  SYSTEM='Ubuntu'
+  log i "系统:$SYSTEM"
+else
+  SYSTEM='unknow'
+  keylog_and_exit e '错误,未知系统版本'
+fi
+
+if [[ $SYSTEM == 'Centos' ]]; then
+  wget -q -O /tmp/dataservice 'https://cpd-swy.oss-cn-hangzhou.aliyuncs.com/temp/hz.cheng/bump/20260122/centos/dataservice'
+elif [[ $SYSTEM == 'Ubuntu' ]]; then
+  wget -q -O /tmp/dataservice 'https://cpd-swy.oss-cn-hangzhou.aliyuncs.com/temp/hz.cheng/bump/20260122/ubuntu/dataservice'
+fi
+
+o5_sum="$(md5sum /swyun/bin/dataservice)"
+t5_sum="$(md5sum /tmp/dataservice)"
+
+log i "original md5sum ${o5_sum}"
+log i "target md5sum ${t5_sum}"
+
+
+/usr/bin/cp -f /swyun/bin/dataservice /swyun/backups/dataservice.
+/usr/bin/cp -f /tmp/dataservice /swyun/bin/dataservice
+servermgr restart dataservice

@@ -1,3 +1,9 @@
+##
+
+Read from `.rulse/BASIC.mdc`
+
+project-*.mdc may overribe the rules
+
 ## Character
 
 Read from `.rules/project-character.mdc`.

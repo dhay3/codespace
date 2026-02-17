@@ -1,13 +1,14 @@
-**/.idea
-**/.git
-**/.conda
-**/.venv
-**/.husky/_
+**/.idea/
+**/.git/
+**/.conda/
+**/.venv/
+**/.ruff_cache/
+**/__pycache__/
 **/node_modules
-**/__pycache__
+**/.husky/_
 
-docs/
-bundle/
+**/docs/
+**/bundle/
 
 .commitlintrc
 .editorconfig

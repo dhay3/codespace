@@ -1,13 +1,13 @@
 **/.idea/
 **/.conda/
 **/.venv/
-**/node_modules/
+**/.ruff_cache/
 **/__pycache__/
+**/node_modules/
 
-logs/
-debug/
-target/
-bundle/
+**/logs/
+**/debug/
+**/target/
+**/bundle/
 
 .env
-package-lock.json

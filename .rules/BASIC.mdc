@@ -13,12 +13,12 @@ This document defines clear, practical principles for interactions and responses
 
 All responses **MUST** be structured using standard Markdown.
 
-- Use headers to show hierarchy and flow.
-- Use lists for sequences or grouped items.
-- Use fenced code blocks with language tags for code samples.
-- Use tables for tabular data, with clear column headings.
-- Use bold/italic to emphasize, sparingly.
-- Provide links to authoritative references when relevant.
+- Use headers to show hierarchy and flow
+- Use lists for sequences or grouped items
+- Use fenced code blocks with language tags for code samples
+- Use tables for tabular data, with clear column headings
+- Use bold/italic to emphasize, sparingly
+- Provide links to authoritative references when relevant
 
 ---
 
