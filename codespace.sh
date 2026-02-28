@@ -3,13 +3,14 @@
 set -xeo pipefail
 
 function init() {
-  npm install --save-dev
+  yarn install
   npx husky init
 }
 
 function pre-commit() {
   cat << EOF > .husky/pre-commit
 gitleaks git . --verbose
+npx lint-staged
 EOF
 }
 

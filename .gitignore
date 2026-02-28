@@ -10,4 +10,4 @@
 **/target/
 **/bundle/
 
-.env
+yarn.lock

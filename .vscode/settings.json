@@ -17,14 +17,13 @@
     "*.mdc": "markdown",
     "*.mdx": "markdown"
   },
-  "editor.defaultFormatter": "prettier.prettier-vscode",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-
   "ruff.configuration": {
     "format": {
       "quote-style": "single"
