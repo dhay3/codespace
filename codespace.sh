@@ -3,8 +3,11 @@
 set -xeo pipefail
 
 function init() {
+  #  conda env export --no-builds | grep -v "prefix:" > environment.yml
   yarn install
   npx husky init
+  conda env create -f environment.yml --prefix ./.conda
+  conda activate ./.conda
 }
 
 function pre-commit() {

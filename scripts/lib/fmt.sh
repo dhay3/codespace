@@ -7,13 +7,6 @@ function lib::fmt::color() {
   declare -rg FMT_UNDERLINE=$(printf '\033[4m')
   declare -rg FMT_CODE=$(printf '\033[2m')
   declare -rg FMT_RESET=$(printf '\033[0m')
-  declare -rg FMT_RAINBOW="
-  $(printf '\033[38;5;196m')
-  $(printf '\033[38;5;202m')
-  $(printf '\033[38;5;226m')
-  $(printf '\033[38;5;082m')
-  $(printf '\033[38;5;021m')
-  "
 }
 
 function lib::fmt::lowerCase() {
