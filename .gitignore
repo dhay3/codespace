@@ -11,3 +11,4 @@
 **/bundle/
 
 yarn.lock
+package-lock.json
