@@ -1,2 +1,2 @@
 gitleaks git . --verbose
-npx lint-staged
+lint-staged
