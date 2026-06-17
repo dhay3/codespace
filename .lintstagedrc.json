@@ -1,8 +1,7 @@
 {
   "*.py": ["ruff check", "ruff format", "git add"],
   "*.sh": ["shellcheck", "prettier --write", "git add"],
-  "*.sql": [],
-  "*.{js,jsx,ts,tsx,css,html,xml,yml,yaml,json}": [
+  "*.{js,jsx,ts,tsx,css,html,xml,yml,yaml,json,sql}": [
     "prettier --write",
     "git add"
   ]
