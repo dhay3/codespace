@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # gitmoji as a commit hook
 if npx -v >&/dev/null

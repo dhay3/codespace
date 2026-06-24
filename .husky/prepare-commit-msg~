@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #commitlint as a commit hook
 exec < /dev/tty && node_modules/.bin/cz --hook || true
