@@ -1,69 +1,48 @@
 #!/usr/bin/env bash
 
-# set -x
-# yarn add commitizen --dev
-# npx commitizen init cz-conventional-changelog --save-dev --save-exact
-
 set -eo pipefail
 
-fmt_lib=scripts/lib/fmt.sh
-
-source "${fmt_lib}"
-
-function export() {
-  local name
-  if [[ -z "${CONDA_DEFAULT_ENV}" ]]; then
-    lib::fmt::errorMessage "Please activate the conda environment first."
-    return 1
-  fi
-  lib::fmt::infoMessage "Please enter the name of the conda environment: "
-  read -r name
-  lib::fmt::infoMessage "Exporting conda environment..."
-  conda env export --no-builds | grep -v "prefix:" > environment.yml
-  echo
-  sed -i "s/^name: .*$/name: ${name}/" environment.yml
-  lib::fmt::succeedMessage "Conda environment exported successfully."
-  echo
-  return 0
-}
-
-function pkg_install() {
-  yarn install
-  npm list
-}
-
-function husky_install() {
-  npx husky init
-}
-
 function init() {
-  yarn install
-  npx husky init
-  conda env create -f environment.yml --prefix ./.conda
-  #conda activate ./.conda
+  conda env create -f environment.yml --prefix ./.conda && conda activate ./.conda && conda list
+  yarn install && npm list
 }
 
-function hook() {
+function hook_commit-msg() {
+  cat << EOF > .husky/commit-msg
+#!/usr/bin/env bash
+
+npx commitlint --edit $1
+EOF
+}
+
+function hook_pre-commit() {
   cat << EOF > .husky/pre-commit
+#!/usr/bin/env bash
+
 gitleaks git . --verbose
 npx lint-staged
 EOF
-  gitmoji init
+}
+
+function hook_pre-commit-msg() {
+  cat << EOF > .husky/prepare-commit-msg
+#!/usr/bin/env bash
+
+if npx -v >&/dev/null
+then
+  exec < /dev/tty
+  npx -c "gitmoji --hook ${1} ${2}"
+else
+  exec < /dev/tty
+  gitmoji --hook "${1}" "${2}"
+fi
+EOF
 }
 
 function __main__() {
   case "${1}" in
     "init")
       init
-      ;;
-    "pre-commit")
-      pre-commit
-      ;;
-    "commit-msg")
-      commit-msg
-      ;;
-    "export")
-      export
       ;;
   esac
 
