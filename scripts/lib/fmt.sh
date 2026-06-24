@@ -36,20 +36,20 @@ function lib::fmt::codeMessage() {
 
 function lib::fmt::errorMessage() {
   local msg="${*}"
-  printf "%s%s[EROR] %s%s\n" "${FMT_RED}" "${FMT_BOLD}" "${FMT_RESET}" "${msg}" >&2 && exit 1
+  printf "%s%s[EROR] %s%s" "${FMT_RED}" "${FMT_BOLD}" "${FMT_RESET}" "${msg}" >&2 && exit 1
 }
 
 function lib::fmt::succeedMessage() {
   local msg="${*}"
-  printf "%s%s[SUCC] %s%s\n" "${FMT_GREEN}" "${FMT_BOLD}" "${FMT_RESET}" "${msg}" >&2
+  printf "%s%s[SUCC] %s%s" "${FMT_GREEN}" "${FMT_BOLD}" "${FMT_RESET}" "${msg}" >&2
 }
 
 function lib::fmt::warningMessage() {
   local msg="${*}"
-  printf "%s%s[WARN] %s%s\n" "${FMT_YELLOW}" "${FMT_BOLD}" "${FMT_RESET}" "${msg}" >&2
+  printf "%s%s[WARN] %s%s" "${FMT_YELLOW}" "${FMT_BOLD}" "${FMT_RESET}" "${msg}" >&2
 }
 
 function lib::fmt::infoMessage() {
   local msg="${*}"
-  printf "%s%s[INFO] %s%s\n" "${FMT_BLUE}" "${FMT_BOLD}" "${FMT_RESET}" "${msg}" >&2
+  printf "%s%s[INFO] %s%s" "${FMT_BLUE}" "${FMT_BOLD}" "${FMT_RESET}" "${msg}" >&2
 }
