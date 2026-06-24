@@ -11,3 +11,5 @@
 **/bundle/
 
 .env
+package-lock.json
+yarn.lock

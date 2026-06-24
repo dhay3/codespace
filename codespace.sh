@@ -3,13 +3,17 @@
 set -xeo pipefail
 
 function init() {
-  npm install --save-dev
+  #  conda env export --no-builds | grep -v "prefix:" > environment.yml
+  yarn install
   npx husky init
+  conda env create -f environment.yml --prefix ./.conda
+  conda activate ./.conda
 }
 
 function pre-commit() {
   cat << EOF > .husky/pre-commit
 gitleaks git . --verbose
+npx lint-staged
 EOF
 }
 
