@@ -3,7 +3,7 @@
 set -eo pipefail
 
 function init() {
-  conda env create -f environment.yml --prefix ./.conda && conda activate ./.conda && conda list
+  conda env create -f environment.yml --prefix "${PWD}/.conda"
   yarn install && npm list
 }
 
